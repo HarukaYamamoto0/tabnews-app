@@ -12,7 +12,8 @@ android {
 
     defaultConfig {
         applicationId "com.harukadev.tabnews"
-        minSdk 26
+        minSdk 27
+        //noinspection OldTargetApi
         targetSdk 34
         versionCode 1
         versionName "1.0"
@@ -23,9 +24,19 @@ android {
         }
     }
 
+    signingConfigs {
+        release {
+            storeFile file("../keystore.jks")
+            storePassword System.getenv("RELEASE_KEYSTORE_PASSWORD")
+            keyAlias System.getenv("RELEASE_KEYSTORE_ALIAS")
+            keyPassword System.getenv("RELEASE_KEY_PASSWORD")
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -44,7 +55,7 @@ android {
     }
     packaging {
         resources {
-            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+            it.excludes.add("/META-INF/{AL2.0,LGPL2.1}")
         }
     }
 }
