@@ -13,6 +13,7 @@ data class Post(
     val id: String,
     val slug: String,
     val title: String,
+    val body: String? = fakeData[0].body,
     @SerialName("owner_id")
     val ownerId: String,
     @SerialName("parent_id")
@@ -77,7 +78,8 @@ val fakeData: Array<Post> = arrayOf(
         tabcoinsCredit = 21,
         tabcoinsDebit = -3,
         author = "lucasfaria",
-        type = "content"
+        type = "content",
+        body = "post 1"
     ),
     Post(
         id = "424b1e31-78af-4516-8854-0feab9dc1491",
@@ -96,7 +98,8 @@ val fakeData: Array<Post> = arrayOf(
         tabcoinsCredit = 11,
         tabcoinsDebit = 0,
         author = "juninhopo",
-        type = "content"
+        type = "content",
+        body = "post 2"
     ),
     Post(
         id = "90211adf-4dfe-4ba5-828b-094332a3bb80",
@@ -115,7 +118,8 @@ val fakeData: Array<Post> = arrayOf(
         tabcoinsCredit = 6,
         tabcoinsDebit = 0,
         author = "gustavomtn",
-        type = "content"
+        type = "content",
+        body = "post 3"
     ),
     Post(
         id = "750f18b3-c258-47cd-9e08-bb420ef6a907",
@@ -134,7 +138,8 @@ val fakeData: Array<Post> = arrayOf(
         tabcoinsCredit = 5,
         tabcoinsDebit = 0,
         author = "uriel",
-        type = "content"
+        type = "content",
+        body = "post 4"
     ),
     Post(
         id = "ddf4e77b-4a86-4c11-b8de-b50c53817e03",
@@ -153,7 +158,8 @@ val fakeData: Array<Post> = arrayOf(
         tabcoinsCredit = 7,
         tabcoinsDebit = -3,
         author = "gsampaio",
-        type = "content"
+        type = "content",
+        body = "post 5"
     ),
     Post(
         id = "f7de8ddc-3068-4b69-8dae-eb80baedac9b",
@@ -172,6 +178,7 @@ val fakeData: Array<Post> = arrayOf(
         tabcoinsCredit = 4,
         tabcoinsDebit = 0,
         author = "nicolas11",
-        type = "content"
+        type = "content",
+        body = "post 6"
     )
 )

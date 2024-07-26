@@ -1,4 +1,4 @@
-package com.harukadev.tabnews.ui.components.fragments
+package com.harukadev.tabnews.ui.components.screens
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -11,15 +11,12 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.harukadev.tabnews.api.TabNewsApi
 import com.harukadev.tabnews.data.fakeData
-import com.harukadev.tabnews.ui.components.activitys.NavigationItem
+import com.harukadev.tabnews.ui.components.activitys.PostContentNavigationItem
 import com.harukadev.tabnews.ui.components.items.PostItem
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
-import java.net.URLEncoder
 
 @Composable
-fun RelevantPostsFragment(navController: NavHostController) {
+fun RecentPostsScreen(navController: NavHostController) {
     LazyColumn(
         Modifier
             .fillMaxSize()
@@ -27,12 +24,10 @@ fun RelevantPostsFragment(navController: NavHostController) {
     ) {
         runBlocking {
             val api = TabNewsApi()
-            val posts = api.getPost(1, 30, TabNewsApi.PostStrategy.RELEVANT)
+            val posts = api.getPost(1, 20, TabNewsApi.PostStrategy.NEW)
             itemsIndexed(posts) { index, post ->
                 PostItem(index + 1, post, onClick = {
-                    val postJson = Json.encodeToString(post)
-                    val encodedPostJson = URLEncoder.encode(postJson, "UTF-8")
-                    navController.navigate("postContent/$encodedPostJson")
+                    navController.navigate(PostContentNavigationItem(author = post.author, slug = post.slug))
                 })
             }
             api.close()
@@ -42,7 +37,7 @@ fun RelevantPostsFragment(navController: NavHostController) {
 
 @Preview
 @Composable
-fun PreviewRelevantPostsFragment() {
+fun RecentPostsPreview() {
     LazyColumn(
         Modifier
             .fillMaxSize()
@@ -53,3 +48,4 @@ fun PreviewRelevantPostsFragment() {
         }
     }
 }
+

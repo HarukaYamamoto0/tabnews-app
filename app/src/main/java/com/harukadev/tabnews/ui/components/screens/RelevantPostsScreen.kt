@@ -1,4 +1,4 @@
-package com.harukadev.tabnews.ui.components.fragments
+package com.harukadev.tabnews.ui.components.screens
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -11,11 +11,12 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.harukadev.tabnews.api.TabNewsApi
 import com.harukadev.tabnews.data.fakeData
+import com.harukadev.tabnews.ui.components.activitys.PostContentNavigationItem
 import com.harukadev.tabnews.ui.components.items.PostItem
 import kotlinx.coroutines.runBlocking
 
 @Composable
-fun RecentPostsFragment(navController: NavHostController) {
+fun RelevantPostsScreen(navController: NavHostController) {
     LazyColumn(
         Modifier
             .fillMaxSize()
@@ -23,10 +24,11 @@ fun RecentPostsFragment(navController: NavHostController) {
     ) {
         runBlocking {
             val api = TabNewsApi()
-            println(TabNewsApi.PostStrategy.RELEVANT)
-            val posts = api.getPost(1, 30, TabNewsApi.PostStrategy.NEW)
+            val posts = api.getPost(1, 20, TabNewsApi.PostStrategy.RELEVANT)
             itemsIndexed(posts) { index, post ->
-                PostItem(index + 1, post)
+                PostItem(index + 1, post, onClick = {
+                    navController.navigate(PostContentNavigationItem(author = post.author, slug = post.slug))
+                })
             }
             api.close()
         }
@@ -35,7 +37,7 @@ fun RecentPostsFragment(navController: NavHostController) {
 
 @Preview
 @Composable
-fun PreviewRecentPostsFragment() {
+fun RelevantPostsPreview() {
     LazyColumn(
         Modifier
             .fillMaxSize()
@@ -46,4 +48,3 @@ fun PreviewRecentPostsFragment() {
         }
     }
 }
-

@@ -18,13 +18,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.harukadev.tabnews.data.fakeData
-import com.harukadev.tabnews.ui.components.fragments.RecentPostsFragment
-import com.harukadev.tabnews.ui.components.fragments.RelevantPostsFragment
+import androidx.navigation.toRoute
+import com.harukadev.tabnews.data.Post
 import com.harukadev.tabnews.ui.components.components.Header
-import com.harukadev.tabnews.ui.components.fragments.PostContentFragment
+import com.harukadev.tabnews.ui.components.screens.PostContentScreen
+import com.harukadev.tabnews.ui.components.screens.RecentPostsScreen
+import com.harukadev.tabnews.ui.components.screens.RelevantPostsScreen
 import com.harukadev.tabnews.ui.theme.Colors
 import com.harukadev.tabnews.ui.theme.TabNewsTheme
+import kotlinx.serialization.Serializable
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,11 +50,12 @@ fun AppPreview() {
     App()
 }
 
-sealed class NavigationItem(val route: String) {
-    data object RelevantPosts : NavigationItem("relevantPosts")
-    data object RecentPosts : NavigationItem("recentPosts")
-    data object PostContent : NavigationItem("postContent/{postJson}")
-}
+@Serializable
+object RelevantPostsNavigationItem
+@Serializable
+object RecentPostsNavigationItem
+@Serializable
+data class PostContentNavigationItem(val author: String, val slug: String)
 
 @Composable
 fun App() {
@@ -66,19 +69,15 @@ fun App() {
             ) {
                 val navController = rememberNavController()
                 Header(navController = navController)
-                NavHost(navController, startDestination = "relevantPosts") {
-                    composable(NavigationItem.RelevantPosts.route) {
-                        RelevantPostsFragment(
-                            navController
-                        )
-                    }
-                    composable(NavigationItem.RecentPosts.route) { RecentPostsFragment(navController) }
-                    composable(NavigationItem.PostContent.route) { backStackEntry ->
-                        PostContentFragment(backStackEntry)
+                NavHost(navController, startDestination = RelevantPostsNavigationItem) {
+                    composable<RelevantPostsNavigationItem> { RelevantPostsScreen(navController) }
+                    composable<RecentPostsNavigationItem> { RecentPostsScreen(navController) }
+                    composable<PostContentNavigationItem> {
+                        val postInfo = it.toRoute<PostContentNavigationItem>()
+                        PostContentScreen(postInfo = postInfo)
                     }
                 }
             }
         }
     }
 }
-

@@ -47,6 +47,15 @@ class TabNewsApi {
         return response
     }
 
+    suspend fun getPostFromUser(owner: String, slug: String): Post {
+        val response: Post =
+            client
+                .get("$baseUrl/contents/$owner/$slug")
+                .body()
+        return response
+    }
+
+
     fun close() {
         client.close()
     }

@@ -1,4 +1,4 @@
-package com.harukadev.tabnews.ui.components.fragments
+package com.harukadev.tabnews.ui.components.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
@@ -14,36 +15,36 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.navigation.NavBackStackEntry
+import com.harukadev.tabnews.api.TabNewsApi
 import com.harukadev.tabnews.data.Post
-import com.harukadev.tabnews.data.fakeData
+import com.harukadev.tabnews.ui.components.activitys.PostContentNavigationItem
+import com.harukadev.tabnews.ui.components.items.PostItem
 import com.harukadev.tabnews.ui.theme.Colors
 import com.harukadev.tabnews.ui.theme.Dimens
-import kotlinx.serialization.json.Json
+import kotlinx.coroutines.runBlocking
 
 @Composable
-fun PostContentFragment(backStackEntry: NavBackStackEntry, modifier: Modifier = Modifier) {
-    val postJson =
-        (backStackEntry.arguments?.getString("postJson") ?: fakeData[0]).toString()
-    val postData = remember { Json.decodeFromString<Post>(postJson) }
-    PostContentRaw(postData)
+fun PostContentScreen(modifier: Modifier = Modifier, postInfo: PostContentNavigationItem) {
+    PostContentScreenRaw(modifier, postInfo)
 }
 
-@Preview
+@Preview(showBackground = true, apiLevel = 35)
 @Composable
-fun PostContentPreview(modifier: Modifier = Modifier) {
-    PostContentRaw(fakeData[0])
+fun PostContentScreenPreview() {
+    PostContentScreenRaw(modifier = Modifier, PostContentNavigationItem(author = "HarukaYamamoto0", slug = "crise-do-impostor"))
 }
 
 @Composable
-fun PostContentRaw(postData: Post, modifier: Modifier = Modifier) {
+fun PostContentScreenRaw(modifier: Modifier = Modifier, postInfo: PostContentNavigationItem) {
+    val (owner, slug) = postInfo
+    lateinit var post: Post
+
     ConstraintLayout(
         modifier
             .fillMaxSize()
@@ -51,7 +52,13 @@ fun PostContentRaw(postData: Post, modifier: Modifier = Modifier) {
             .padding(0.dp)
             .padding(Dimens.paddingPostContent)
     ) {
-        val (refTabcoinLayout, refAuthor, refCreatedAt) = createRefs()
+        val (refTabcoinLayout, refAuthor, refCreatedAt, refContent) = createRefs()
+
+        runBlocking {
+            val api = TabNewsApi()
+            post = api.getPostFromUser(owner, slug)
+            api.close()
+        }
 
         Column(
             modifier = Modifier.constrainAs(refTabcoinLayout) {
@@ -62,10 +69,12 @@ fun PostContentRaw(postData: Post, modifier: Modifier = Modifier) {
         ) {
             Icon(Icons.Filled.KeyboardArrowUp, null, tint = Colors.onDarkIcon)
             Spacer(modifier = Modifier.padding(vertical = 7.dp))
-            Text(text = postData.tabcoins.toString(), style = TextStyle(
-                color = Colors.onText,
-                fontSize = Dimens.fontSizeOfPostContentTabcoin,
-            ))
+            Text(
+                text = post.tabcoins.toString(), style = TextStyle(
+                    color = Colors.onText,
+                    fontSize = Dimens.fontSizeOfPostContentTabcoin,
+                )
+            )
             Spacer(modifier = Modifier.padding(vertical = 7.dp))
             Icon(Icons.Filled.KeyboardArrowDown, null, tint = Colors.onDarkIcon)
         }
@@ -78,10 +87,11 @@ fun PostContentRaw(postData: Post, modifier: Modifier = Modifier) {
                     top.linkTo(parent.top)
                     start.linkTo(refTabcoinLayout.end)
                 }
-                .padding(start = 15.dp, end = 7.dp).offset(y = (-5).dp)
+                .padding(start = 15.dp, end = 7.dp)
+                .offset(y = (-5).dp)
         ) {
             Text(
-                text = postData.author,
+                text = post.author,
                 style = TextStyle(
                     color = Colors.onText,
                     fontSize = Dimens.fontSizeOfPostContentCreatedAt,
@@ -90,7 +100,7 @@ fun PostContentRaw(postData: Post, modifier: Modifier = Modifier) {
         }
 
         Text(
-            text = postData.createdAt,
+            text = post.createdAt,
             style = TextStyle(
                 color = Colors.onDarkText,
                 fontSize = Dimens.fontSizeOfPostContentCreatedAt
@@ -99,6 +109,18 @@ fun PostContentRaw(postData: Post, modifier: Modifier = Modifier) {
                 top.linkTo(parent.top)
                 start.linkTo(refAuthor.end)
             }
+        )
+
+        Text(
+            text = post.body ?: "",
+            style = TextStyle(
+                color = Colors.onDarkText,
+                fontSize = Dimens.fontSizeOfPostContentCreatedAt
+            ),
+            modifier = Modifier.constrainAs(refContent) {
+                top.linkTo(refAuthor.bottom)
+                start.linkTo(refTabcoinLayout.end)
+            }.padding(start = 15.dp, top = 10.dp).padding(end = 10.dp)
         )
     }
 }
