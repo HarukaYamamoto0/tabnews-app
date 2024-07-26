@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TabNews</string>
+    <string name="textView_toolbar_relevant">Relevantes</string>
+    <string name="textView_toolbar_recent">Recentes</string>
+    <string name="tip_create_new_article">Create new article</string>
+
+</resources>

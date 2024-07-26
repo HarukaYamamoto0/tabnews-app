@@ -1,0 +1,9 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="AppTheme" parent="android:Theme.Material.Light.NoActionBar">
+        <!-- Remove highlight from text fields -->
+        <item name="android:autofilledHighlight" tools:ignore="NewApi">@android:color/transparent
+        </item>
+    </style>
+
+</resources>
