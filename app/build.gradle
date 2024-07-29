@@ -83,6 +83,7 @@ dependencies {
     implementation libs.slf4j.android
     implementation libs.androidx.graphics.shapes
     implementation libs.androidx.navigation.fragment.ktx
+    implementation project(':app:marktocompose')
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core

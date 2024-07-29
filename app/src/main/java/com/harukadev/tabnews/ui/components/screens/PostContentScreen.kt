@@ -21,6 +21,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import com.harukadev.marktocompose.MarkdownToComposable
 import com.harukadev.tabnews.api.TabNewsApi
 import com.harukadev.tabnews.data.Post
 import com.harukadev.tabnews.ui.components.activitys.PostContentNavigationItem
@@ -37,7 +38,10 @@ fun PostContentScreen(modifier: Modifier = Modifier, postInfo: PostContentNaviga
 @Preview(showBackground = true, apiLevel = 35)
 @Composable
 fun PostContentScreenPreview() {
-    PostContentScreenRaw(modifier = Modifier, PostContentNavigationItem(author = "HarukaYamamoto0", slug = "crise-do-impostor"))
+    PostContentScreenRaw(
+        modifier = Modifier,
+        PostContentNavigationItem(author = "HarukaYamamoto0", slug = "crise-do-impostor")
+    )
 }
 
 @Composable
@@ -111,16 +115,14 @@ fun PostContentScreenRaw(modifier: Modifier = Modifier, postInfo: PostContentNav
             }
         )
 
-        Text(
-            text = post.body ?: "",
-            style = TextStyle(
-                color = Colors.onDarkText,
-                fontSize = Dimens.fontSizeOfPostContentCreatedAt
-            ),
-            modifier = Modifier.constrainAs(refContent) {
-                top.linkTo(refAuthor.bottom)
-                start.linkTo(refTabcoinLayout.end)
-            }.padding(start = 15.dp, top = 10.dp).padding(end = 10.dp)
-        )
+        post.body?.let {
+            MarkdownToComposable(markdown = it, modifier = Modifier
+                .constrainAs(refContent) {
+                    top.linkTo(refAuthor.bottom)
+                    start.linkTo(refTabcoinLayout.end)
+                }
+                .padding(start = 15.dp, top = 10.dp)
+                .padding(end = 10.dp))
+        }
     }
 }

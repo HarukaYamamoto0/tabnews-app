@@ -23,6 +23,12 @@ slf4jAndroid = "1.7.36"
 compose-plugin = "1.7.0-alpha01"
 graphicsShapes = "1.0.0-rc01"
 navigationFragmentKtx = "2.8.0-beta06"
+appcompat = "1.7.0"
+material = "1.12.0"
+ksoup = "0.1.2"
+markdown = "0.7.3"
+compose = "1.0.0-beta01"
+composeMaterial3 = "1.0.0-alpha23"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -53,9 +59,16 @@ ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging", version
 slf4j-android = { group = "org.slf4j", name = "slf4j-android", version.ref = "slf4jAndroid" }
 androidx-graphics-shapes = { group = "androidx.graphics", name = "graphics-shapes", version.ref = "graphicsShapes" }
 androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+ksoup = { group = "com.fleeksoft.ksoup", name = "ksoup", version.ref = "ksoup" }
+markdown = { group = "org.jetbrains", name = "markdown", version.ref = "markdown" }
+compose = { group = "com.github.bumptech.glide", name = "compose", version.ref = "compose" }
+androidx-compose-material3 = { group = "androidx.wear.compose", name = "compose-material3", version.ref = "composeMaterial3" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+android-library = { id = "com.android.library", version.ref = "agp" }
