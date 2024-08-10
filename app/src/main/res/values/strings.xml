@@ -5,5 +5,11 @@
     <string name="textView_toolbar_relevant">Relevantes</string>
     <string name="textView_toolbar_recent">Recentes</string>
     <string name="tip_create_new_article">Create new article</string>
+    <string name="home">Home</string>
+    <string name="recentPosts">News</string>
+    <string name="notifications">Notifications</string>
+    <string name="settings">Settings</string>
+    <string name="tabcoin">TabCoin</string>
+    <string name="tabcash">TabCash</string>
 
 </resources>

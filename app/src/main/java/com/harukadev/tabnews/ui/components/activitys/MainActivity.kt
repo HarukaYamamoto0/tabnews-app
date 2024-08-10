@@ -18,15 +18,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.toRoute
-import com.harukadev.tabnews.data.Post
+import com.harukadev.tabnews.ui.components.components.BottomNavigationCustom
 import com.harukadev.tabnews.ui.components.components.Header
-import com.harukadev.tabnews.ui.components.screens.PostContentScreen
+import com.harukadev.tabnews.ui.components.components.Screen
+import com.harukadev.tabnews.ui.components.screens.NotificationsScreen
 import com.harukadev.tabnews.ui.components.screens.RecentPostsScreen
 import com.harukadev.tabnews.ui.components.screens.RelevantPostsScreen
+import com.harukadev.tabnews.ui.components.screens.SettingsScreen
 import com.harukadev.tabnews.ui.theme.Colors
 import com.harukadev.tabnews.ui.theme.TabNewsTheme
-import kotlinx.serialization.Serializable
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,32 +50,38 @@ fun AppPreview() {
     App()
 }
 
-@Serializable
-object RelevantPostsNavigationItem
-@Serializable
-object RecentPostsNavigationItem
-@Serializable
-data class PostContentNavigationItem(val author: String, val slug: String)
-
 @Composable
 fun App() {
     TabNewsTheme {
-        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+        val navController = rememberNavController()
+
+        Scaffold(modifier = Modifier.fillMaxSize(),
+            bottomBar = { BottomNavigationCustom(navController) }
+        ) { innerPadding ->
             Column(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(Colors.background)
                     .padding(innerPadding)
             ) {
-                val navController = rememberNavController()
-                Header(navController = navController)
-                NavHost(navController, startDestination = RelevantPostsNavigationItem) {
-                    composable<RelevantPostsNavigationItem> { RelevantPostsScreen(navController) }
-                    composable<RecentPostsNavigationItem> { RecentPostsScreen(navController) }
-                    composable<PostContentNavigationItem> {
-                        val postInfo = it.toRoute<PostContentNavigationItem>()
-                        PostContentScreen(postInfo = postInfo)
-                    }
+                Header()
+//                NavHost(navController, startDestination = RelevantPostsNavigationItem) {
+//                    composable<RelevantPostsNavigationItem> { RelevantPostsScreen(navController) }
+//                    composable<RecentPostsNavigationItem> { RecentPostsScreen(navController) }
+//                    composable<PostContentNavigationItem> {
+//                        val postInfo = it.toRoute<PostContentNavigationItem>()
+//                        PostContentScreen(postInfo = postInfo)
+//                    }
+//                }
+                NavHost(
+                    navController,
+                    startDestination = Screen.Home.route,
+                    Modifier.padding(innerPadding)
+                ) {
+                    composable(Screen.Home.route) { RelevantPostsScreen(navController) }
+                    composable(Screen.RecentPosts.route) { RecentPostsScreen(navController) }
+                    composable(Screen.Notifications.route) { NotificationsScreen(navController) }
+                    composable(Screen.Settings.route) { SettingsScreen(navController) }
                 }
             }
         }

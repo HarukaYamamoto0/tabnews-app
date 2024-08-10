@@ -33,7 +33,6 @@ fun MarkdownToComposable(modifier: Modifier = Modifier, markdown: String) {
     Column(
         modifier = Modifier
             .padding(16.dp)
-            .verticalScroll(rememberScrollState())
             .then(modifier)
     ) {
         document.body().childNodes().forEach { node ->

@@ -16,9 +16,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.harukadev.tabnews.data.Post
-import com.harukadev.tabnews.data.fakeData
 import com.harukadev.tabnews.ui.theme.Colors
 import com.harukadev.tabnews.ui.theme.Dimens
+import com.harukadev.tabnews.utils.fakeData.fakeData
 
 @Preview(showBackground = true)
 @Composable

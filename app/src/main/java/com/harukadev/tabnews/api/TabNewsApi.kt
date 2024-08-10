@@ -4,6 +4,7 @@ import com.harukadev.tabnews.data.Post
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.android.Android
+import io.ktor.client.plugins.cache.HttpCache
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logging
@@ -29,6 +30,8 @@ class TabNewsApi {
             level = LogLevel.ALL
         }
 
+        install(HttpCache)
+
         install(ContentNegotiation) {
             json(Json {
                 prettyPrint = true
@@ -48,10 +51,7 @@ class TabNewsApi {
     }
 
     suspend fun getPostFromUser(owner: String, slug: String): Post {
-        val response: Post =
-            client
-                .get("$baseUrl/contents/$owner/$slug")
-                .body()
+        val response: Post = client.get("$baseUrl/contents/$owner/$slug").body()
         return response
     }
 

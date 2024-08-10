@@ -16,6 +16,6 @@ class Dimens {
         val fontSizeOfPostContentTitle = 15.sp
 
         // Paddings
-        val paddingPostContent = PaddingValues(horizontal = 15.dp, vertical = 20.dp)
+        val paddingPostContent = PaddingValues(horizontal = 13.dp, vertical = 20.dp)
     }
 }

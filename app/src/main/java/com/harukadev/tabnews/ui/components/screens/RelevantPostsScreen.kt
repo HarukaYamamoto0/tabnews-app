@@ -10,9 +10,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.harukadev.tabnews.api.TabNewsApi
-import com.harukadev.tabnews.data.fakeData
-import com.harukadev.tabnews.ui.components.activitys.PostContentNavigationItem
+//import com.harukadev.tabnews.ui.components.activitys.PostContentNavigationItem
 import com.harukadev.tabnews.ui.components.items.PostItem
+import com.harukadev.tabnews.utils.fakeData.fakeData
 import kotlinx.coroutines.runBlocking
 
 @Composable
@@ -27,7 +27,7 @@ fun RelevantPostsScreen(navController: NavHostController) {
             val posts = api.getPost(1, 20, TabNewsApi.PostStrategy.RELEVANT)
             itemsIndexed(posts) { index, post ->
                 PostItem(index + 1, post, onClick = {
-                    navController.navigate(PostContentNavigationItem(author = post.author, slug = post.slug))
+//                    navController.navigate(PostContentNavigationItem(author = post.author, slug = post.slug))
                 })
             }
             api.close()
