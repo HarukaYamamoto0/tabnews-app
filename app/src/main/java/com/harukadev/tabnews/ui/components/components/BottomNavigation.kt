@@ -4,6 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.Composable
@@ -21,7 +22,12 @@ import androidx.navigation.compose.rememberNavController
 import com.harukadev.tabnews.R
 import com.harukadev.tabnews.ui.theme.Colors
 
-sealed class Screen(val route: String, @StringRes val name: Int, @DrawableRes val iconId: Int) {
+sealed class Screen(
+    val route: String,
+    @StringRes val name: Int,
+    @DrawableRes val iconId: Int,
+    data: Any? = null
+) {
     data object Home :
         Screen("Home", R.string.home, R.drawable.ic_home)
 
@@ -33,6 +39,11 @@ sealed class Screen(val route: String, @StringRes val name: Int, @DrawableRes va
 
     data object Settings :
         Screen("Settings", R.string.settings, R.drawable.ic_manage_accounts)
+
+    data object PostContent : Screen(
+        "PostContent",
+        R.string.postcontent, R.drawable.ic_manage_accounts
+    )
 }
 
 val items = listOf(
@@ -53,12 +64,18 @@ fun BottomNavigationCustom(navController: NavController = rememberNavController(
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
-    NavigationBar(modifier = Modifier.height(50.dp), containerColor = Colors.onBackground) {
+    NavigationBar(containerColor = Colors.onBackground) {
         items.forEach { screen ->
             NavigationBarItem(
-                modifier = Modifier.height(50.dp),
-                icon = { IconItem(iconId = screen.iconId, contentDescription = stringResource(id = screen.name)) },
-//                label = { Text(stringResource(screen.name), color = Colors.text) },
+                modifier = Modifier.size(width = 77.dp, 48.dp),
+                icon = {
+                    IconItem(
+                        iconId = screen.iconId,
+                        contentDescription = stringResource(id = screen.name)
+                    )
+                },
+                // TODO: putting labels in BottomNavigation
+                // label = { Text(stringResource(screen.name), color = Colors.text) },
                 selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
                 onClick = {
                     navController.navigate(screen.route) {

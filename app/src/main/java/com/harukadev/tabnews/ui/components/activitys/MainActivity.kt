@@ -22,6 +22,7 @@ import com.harukadev.tabnews.ui.components.components.BottomNavigationCustom
 import com.harukadev.tabnews.ui.components.components.Header
 import com.harukadev.tabnews.ui.components.components.Screen
 import com.harukadev.tabnews.ui.components.screens.NotificationsScreen
+import com.harukadev.tabnews.ui.components.screens.PostContentScreen
 import com.harukadev.tabnews.ui.components.screens.RecentPostsScreen
 import com.harukadev.tabnews.ui.components.screens.RelevantPostsScreen
 import com.harukadev.tabnews.ui.components.screens.SettingsScreen
@@ -65,23 +66,15 @@ fun App() {
                     .padding(innerPadding)
             ) {
                 Header()
-//                NavHost(navController, startDestination = RelevantPostsNavigationItem) {
-//                    composable<RelevantPostsNavigationItem> { RelevantPostsScreen(navController) }
-//                    composable<RecentPostsNavigationItem> { RecentPostsScreen(navController) }
-//                    composable<PostContentNavigationItem> {
-//                        val postInfo = it.toRoute<PostContentNavigationItem>()
-//                        PostContentScreen(postInfo = postInfo)
-//                    }
-//                }
                 NavHost(
                     navController,
-                    startDestination = Screen.Home.route,
-                    Modifier.padding(innerPadding)
+                    startDestination = Screen.Home.route
                 ) {
                     composable(Screen.Home.route) { RelevantPostsScreen(navController) }
                     composable(Screen.RecentPosts.route) { RecentPostsScreen(navController) }
                     composable(Screen.Notifications.route) { NotificationsScreen(navController) }
                     composable(Screen.Settings.route) { SettingsScreen(navController) }
+                    composable(Screen.PostContent.route) { PostContentScreen(navController) }
                 }
             }
         }

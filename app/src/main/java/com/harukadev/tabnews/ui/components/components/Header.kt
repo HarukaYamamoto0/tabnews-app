@@ -57,12 +57,12 @@ fun Header() {
         Image(painter = painterResource(R.drawable.ic_tabcoin),
             contentDescription = stringResource(R.string.tabcoin),
             modifier = Modifier
-                .size(20.dp)
+                .size(10.dp)
                 .constrainAs(refTabcoinIcon) {
                     end.linkTo(refTabcoin.start)
                     top.linkTo(parent.top)
                     bottom.linkTo(parent.bottom)
-                }.clip(RoundedCornerShape(5.dp))
+                }.clip(RoundedCornerShape(2.dp))
         )
 
         Text(
@@ -72,7 +72,7 @@ fun Header() {
                     end.linkTo(refTabCash.start)
                     top.linkTo(parent.top)
                     bottom.linkTo(parent.bottom)
-                }.padding(start = 7.dp, end = 20.dp),
+                }.padding(start = 5.dp, end = 20.dp),
             style = TextStyle(
                 color = Colors.text,
                 fontSize = Dimens.fontSizeOfSectionTitle
@@ -82,13 +82,13 @@ fun Header() {
         Image(painter = painterResource(R.drawable.ic_tabcash),
             contentDescription = stringResource(R.string.tabcash),
             modifier = Modifier
-                .size(20.dp)
+                .size(10.dp)
                 .constrainAs(refTabCashIcon) {
                     start.linkTo(refTabcoin.end)
                     end.linkTo(refTabCash.start)
                     top.linkTo(parent.top)
                     bottom.linkTo(parent.bottom)
-                }.clip(RoundedCornerShape(5.dp))
+                }.clip(RoundedCornerShape(2.dp))
         )
 
         Text(
@@ -98,7 +98,7 @@ fun Header() {
                     end.linkTo(parent.end)
                     top.linkTo(parent.top)
                     bottom.linkTo(parent.bottom)
-                }.padding(start = 17.dp, end = 10.dp),
+                }.padding(start = 12.dp, end = 10.dp),
             style = TextStyle(
                 color = Colors.text,
                 fontSize = Dimens.fontSizeOfSectionTitle
