@@ -1,6 +1,9 @@
 package com.harukadev.tabnews.api
 
+import androidx.compose.foundation.lazy.itemsIndexed
+import com.harukadev.tabnews.data.ContentRaw
 import com.harukadev.tabnews.data.PostContent
+import com.harukadev.tabnews.ui.components.components.items
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.android.Android
@@ -43,16 +46,22 @@ class TabNewsApi {
     }
 
     suspend fun getPost(page: Int, perPage: Int, strategy: ContentStrategy): List<PostContent> {
-        val response: List<PostContent> =
+        val response: List<ContentRaw> =
             client
                 .get("$baseUrl/contents?page=$page&per_page=$perPage&strategy=${strategy.strategy}")
                 .body()
-        return response
+
+        val postContentList: List<PostContent> = response.map { contentRaw ->
+            contentRaw.toPostContent()
+        }
+
+        return postContentList
     }
 
+
     suspend fun getPostFromUser(owner: String, slug: String): PostContent {
-        val response: PostContent = client.get("$baseUrl/contents/$owner/$slug").body()
-        return response
+        val response: ContentRaw = client.get("$baseUrl/contents/$owner/$slug").body()
+        return response.toPostContent()
     }
 
 

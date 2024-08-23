@@ -69,7 +69,6 @@ dependencies {
     implementation libs.androidx.ui.graphics
     implementation libs.androidx.ui.tooling.preview
     implementation libs.androidx.constraintlayout.compose
-    implementation libs.androidx.navigation.compose
     implementation libs.accompanist.systemuicontroller
     implementation libs.ktor.client.core
     implementation libs.ktor.client.cio
@@ -84,6 +83,7 @@ dependencies {
     implementation project(':app:marktocompose')
     implementation libs.androidx.material3.android
     implementation libs.material
+    implementation libs.navigation.compose
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core

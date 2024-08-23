@@ -2,7 +2,9 @@ package com.harukadev.tabnews.data
 
 import com.harukadev.tabnews.utils.Constants
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class ContentRaw(
     val body: String? = Constants.STRING_NOTHING,
     @SerialName("children_deep_count")

@@ -11,7 +11,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.harukadev.tabnews.api.TabNewsApi
 import com.harukadev.tabnews.ui.components.items.PostItem
-import com.harukadev.tabnews.utils.fakeData.fakeData
 import kotlinx.coroutines.runBlocking
 
 @Composable
@@ -34,20 +33,6 @@ fun RecentPostsScreen(navController: NavHostController) {
                 })
             }
             api.close()
-        }
-    }
-}
-
-@Preview
-@Composable
-fun RecentPostsPreview() {
-    LazyColumn(
-        Modifier
-            .fillMaxSize()
-            .padding(15.dp)
-    ) {
-        itemsIndexed(fakeData) { index, post ->
-            PostItem(index + 1, post)
         }
     }
 }

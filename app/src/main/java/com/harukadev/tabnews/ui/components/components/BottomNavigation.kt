@@ -1,12 +1,11 @@
 package com.harukadev.tabnews.ui.components.components
 
 import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.BottomAppBar
 import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -23,36 +22,29 @@ import com.harukadev.tabnews.R
 import com.harukadev.tabnews.ui.theme.Colors
 import kotlinx.serialization.Serializable
 
-sealed class Screen(
-    val route: String,
-    @StringRes val name: Int,
-    @DrawableRes val iconId: Int,
-    data: Any? = null
+@Serializable
+data class Screen(
+    val name: Int,
+    val iconId: Int
 ) {
-    data object Home :
-        Screen("Home", R.string.home, R.drawable.ic_home)
-
-    data object RecentPosts :
-        Screen("RecentPosts", R.string.recentPosts, R.drawable.ic_recent)
-
-    data object Notifications :
-        Screen("Notifications", R.string.notifications, R.drawable.ic_notifications)
-
-    data object Settings :
-        Screen("Settings", R.string.settings, R.drawable.ic_manage_accounts)
-
-    @Serializable
-    data object PostContent : Screen(
-        "PostContent",
-        R.string.postContent, R.drawable.ic_manage_accounts
-    )
+    val route: String
+        get() = name.toString()
 }
 
+val HomeRoute = Screen(R.string.home, R.drawable.ic_home)
+val RecentPostsRoute = Screen(R.string.recentPosts, R.drawable.ic_recent)
+val NotificationsRoute = Screen(R.string.notifications, R.drawable.ic_notifications)
+val SettingsRoute = Screen(R.string.settings, R.drawable.ic_manage_accounts)
+
+@Serializable
+data class PostContentRoute(val ownerUsername: String, val slug: String)
+
+
 val items = listOf(
-    Screen.Home,
-    Screen.RecentPosts,
-    Screen.Notifications,
-    Screen.Settings,
+    HomeRoute,
+    RecentPostsRoute,
+    NotificationsRoute,
+    SettingsRoute,
 )
 
 @Composable
@@ -70,7 +62,7 @@ fun BottomNavigationCustom(navController: NavController = rememberNavController(
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
-    BottomAppBar(modifier = Modifier.height(64.dp), backgroundColor = Colors.onBackground) {
+    BottomAppBar(modifier = Modifier.height(64.dp), containerColor = Colors.onBackground) {
         items.forEach { screen ->
             BottomNavigationItem(
                 modifier = Modifier.height(64.dp),
@@ -83,9 +75,9 @@ fun BottomNavigationCustom(navController: NavController = rememberNavController(
                 },
                 // TODO: putting labels in BottomNavigation
                 // label = { Text(stringResource(screen.name), color = Colors.text) },
-                selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
+                selected = currentDestination?.hierarchy?.any { it.route == screen.name.toString() } == true,
                 onClick = {
-                    navController.navigate(screen.route) {
+                    navController.navigate(screen.name.toString()) {
                         popUpTo(navController.graph.findStartDestination().id) {
                             saveState = true
                         }

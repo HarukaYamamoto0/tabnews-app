@@ -1,5 +1,8 @@
 package com.harukadev.tabnews.data
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class PostContent(
     val body: String,
     val comments: Int,

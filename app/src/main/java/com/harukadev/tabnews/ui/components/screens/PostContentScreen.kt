@@ -24,21 +24,22 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.navigation.NavHostController
 import com.harukadev.tabnews.api.TabNewsApi
 import com.harukadev.tabnews.data.PostContent
+import com.harukadev.tabnews.ui.components.components.PostContentRoute
 import com.harukadev.tabnews.ui.theme.Colors
 import com.harukadev.tabnews.ui.theme.Dimens
 import kotlinx.coroutines.runBlocking
 
 @Composable
 fun PostContentScreen(
-    navController: NavHostController,
+    args: PostContentRoute,
     modifier: Modifier = Modifier,
-    post: PostContent
 ) {
-    PostContentScreenRaw(modifier, post)
+    PostContentScreenRaw(modifier, args)
 }
 
 @Composable
-fun PostContentScreenRaw(modifier: Modifier = Modifier, post: PostContent) {
+fun PostContentScreenRaw(modifier: Modifier = Modifier, args: PostContentRoute) {
+    val (ownerUsername, slug) = args
     ConstraintLayout(
         modifier
             .fillMaxSize()
@@ -52,7 +53,7 @@ fun PostContentScreenRaw(modifier: Modifier = Modifier, post: PostContent) {
 
         runBlocking {
             val api = TabNewsApi()
-            postContent = api.getPostFromUser(post.ownerUsername, post.slug)
+            postContent = api.getPostFromUser(ownerUsername, slug)
             api.close()
         }
 
@@ -107,13 +108,18 @@ fun PostContentScreenRaw(modifier: Modifier = Modifier, post: PostContent) {
             }
         )
 
-        Text(text = postContent.body, modifier = Modifier
-            .constrainAs(refContent) {
-                top.linkTo(refAuthor.bottom)
-                start.linkTo(refTabCoinLayout.end)
-            }
-            //.padding(start = 15.dp, top = 10.dp)
-            .padding(end = 10.dp))
+        Text(
+            text = postContent.body,
+            modifier = Modifier
+                .constrainAs(refContent) {
+                    top.linkTo(refAuthor.bottom)
+                    start.linkTo(refTabCoinLayout.end)
+                }
+                .padding(vertical = 10.dp, horizontal = 15.dp)
+                .padding(end = 10.dp),
+            style = TextStyle(color = Colors.text)
+
+        )
 
     }
 }

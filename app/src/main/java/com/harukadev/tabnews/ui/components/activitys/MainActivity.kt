@@ -18,9 +18,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
+import com.harukadev.tabnews.data.PostContent
 import com.harukadev.tabnews.ui.components.components.BottomNavigationCustom
 import com.harukadev.tabnews.ui.components.components.Header
-import com.harukadev.tabnews.ui.components.components.Screen
+import com.harukadev.tabnews.ui.components.components.HomeRoute
+import com.harukadev.tabnews.ui.components.components.NotificationsRoute
+import com.harukadev.tabnews.ui.components.components.PostContentRoute
+import com.harukadev.tabnews.ui.components.components.RecentPostsRoute
+import com.harukadev.tabnews.ui.components.components.SettingsRoute
 import com.harukadev.tabnews.ui.components.screens.NotificationsScreen
 import com.harukadev.tabnews.ui.components.screens.PostContentScreen
 import com.harukadev.tabnews.ui.components.screens.RecentPostsScreen
@@ -28,6 +34,7 @@ import com.harukadev.tabnews.ui.components.screens.RelevantPostsScreen
 import com.harukadev.tabnews.ui.components.screens.SettingsScreen
 import com.harukadev.tabnews.ui.theme.Colors
 import com.harukadev.tabnews.ui.theme.TabNewsTheme
+import kotlinx.serialization.Serializable
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,14 +75,16 @@ fun App() {
                 Header()
                 NavHost(
                     navController,
-                    startDestination = Screen.Home.route
+                    startDestination = HomeRoute.route
                 ) {
-                    composable(Screen.Home.route) { RelevantPostsScreen(navController) }
-                    composable(Screen.RecentPosts.route) { RecentPostsScreen(navController) }
-                    composable(Screen.Notifications.route) { NotificationsScreen(navController) }
-                    composable(Screen.Settings.route) { SettingsScreen(navController) }
-                    composable<Screen.PostContent> {
-                        PostContentScreen(navController)
+
+                    composable(HomeRoute.route) { RelevantPostsScreen(navController) }
+                    composable(RecentPostsRoute.route) { RecentPostsScreen(navController) }
+                    composable(NotificationsRoute.route) { NotificationsScreen(navController) }
+                    composable(SettingsRoute.route) { SettingsScreen(navController) }
+                    composable<PostContentRoute> {
+                        val args = it.toRoute<PostContentRoute>()
+                        PostContentScreen(args)
                     }
                 }
             }

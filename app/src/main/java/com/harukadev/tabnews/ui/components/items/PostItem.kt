@@ -18,11 +18,9 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import com.harukadev.tabnews.data.PostContent
 import com.harukadev.tabnews.ui.theme.Colors
 import com.harukadev.tabnews.ui.theme.Dimens
-import com.harukadev.tabnews.utils.fakeData.fakeData
 
-@Preview(showBackground = true)
 @Composable
-fun PostItem(index: Int = 0, postContent: PostContent = fakeData[0], onClick: () -> Unit = {}) {
+fun PostItem(index: Int = 0, postContent: PostContent, onClick: () -> Unit = {}) {
     ConstraintLayout(
         modifier = Modifier
             .fillMaxWidth()
