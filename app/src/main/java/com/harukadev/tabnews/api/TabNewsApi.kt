@@ -1,6 +1,6 @@
 package com.harukadev.tabnews.api
 
-import com.harukadev.tabnews.data.Post
+import com.harukadev.tabnews.data.PostContent
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.android.Android
@@ -15,7 +15,7 @@ import kotlinx.serialization.json.Json
 class TabNewsApi {
     private val baseUrl = "https://www.tabnews.com.br/api/v1"
 
-    enum class PostStrategy(val strategy: String) {
+    enum class ContentStrategy(val strategy: String) {
         NEW("new"),
         OLD("old"),
         RELEVANT("relevant");
@@ -42,16 +42,16 @@ class TabNewsApi {
         }
     }
 
-    suspend fun getPost(page: Int, perPage: Int, strategy: PostStrategy): List<Post> {
-        val response: List<Post> =
+    suspend fun getPost(page: Int, perPage: Int, strategy: ContentStrategy): List<PostContent> {
+        val response: List<PostContent> =
             client
                 .get("$baseUrl/contents?page=$page&per_page=$perPage&strategy=${strategy.strategy}")
                 .body()
         return response
     }
 
-    suspend fun getPostFromUser(owner: String, slug: String): Post {
-        val response: Post = client.get("$baseUrl/contents/$owner/$slug").body()
+    suspend fun getPostFromUser(owner: String, slug: String): PostContent {
+        val response: PostContent = client.get("$baseUrl/contents/$owner/$slug").body()
         return response
     }
 

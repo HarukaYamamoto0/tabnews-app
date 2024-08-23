@@ -74,7 +74,9 @@ fun App() {
                     composable(Screen.RecentPosts.route) { RecentPostsScreen(navController) }
                     composable(Screen.Notifications.route) { NotificationsScreen(navController) }
                     composable(Screen.Settings.route) { SettingsScreen(navController) }
-                    composable(Screen.PostContent.route) { PostContentScreen(navController) }
+                    composable<Screen.PostContent> {
+                        PostContentScreen(navController)
+                    }
                 }
             }
         }

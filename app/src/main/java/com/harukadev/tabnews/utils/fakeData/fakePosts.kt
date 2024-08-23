@@ -1,9 +1,9 @@
 package com.harukadev.tabnews.utils.fakeData
 
-import com.harukadev.tabnews.data.Post
+import com.harukadev.tabnews.data.PostContent
 
-val fakeData: Array<Post> = arrayOf(
-    Post(
+val fakeData: Array<PostContent> = arrayOf(
+    PostContent(
         id = "d5b4e195-9f2e-47bb-b097-8a51dfc0886e",
         slug = "dev-na-gringa-contratacao-impostos-hardware-e-comecando-do-zero",
         title = "Dev na Gringa: contratação, impostos, hardware e começando do zero.",
@@ -23,7 +23,7 @@ val fakeData: Array<Post> = arrayOf(
         type = "content",
         body = "post 1"
     ),
-    Post(
+    PostContent(
         id = "424b1e31-78af-4516-8854-0feab9dc1491",
         slug = "travada-muito-besta-em-uma-entrevista-me-diz-o-que-aconteceria-com-voce",
         title = "TRAVEI NA ENTREVISTA: O próximo pode ser você CUIDADO!!!!",
@@ -43,7 +43,7 @@ val fakeData: Array<Post> = arrayOf(
         type = "content",
         body = "post 2"
     ),
-    Post(
+    PostContent(
         id = "90211adf-4dfe-4ba5-828b-094332a3bb80",
         slug = "pitch-que-tal-aprender-melhorar-seu-ingles-usando-videos-do-youtube",
         title = "PITCH | QUE TAL APRENDER/MELHORAR SEU INGLÊS USANDO VÍDEOS DO YOUTUBE?",
@@ -63,7 +63,7 @@ val fakeData: Array<Post> = arrayOf(
         type = "content",
         body = "post 3"
     ),
-    Post(
+    PostContent(
         id = "750f18b3-c258-47cd-9e08-bb420ef6a907",
         slug = "self-hosting-um-guia-para-iniciantes-hospede-voce-mesmo-em-sua-casa",
         title = "Self Hosting - Um guia para iniciantes - hospede você mesmo em sua casa!",
@@ -83,7 +83,7 @@ val fakeData: Array<Post> = arrayOf(
         type = "content",
         body = "post 4"
     ),
-    Post(
+    PostContent(
         id = "ddf4e77b-4a86-4c11-b8de-b50c53817e03",
         slug = "crowdstrike-analise-do-erro",
         title = "CrowdStrike - Análise do Erro",
@@ -103,7 +103,7 @@ val fakeData: Array<Post> = arrayOf(
         type = "content",
         body = "post 5"
     ),
-    Post(
+    PostContent(
         id = "f7de8ddc-3068-4b69-8dae-eb80baedac9b",
         slug = "estruturas-de-controle-em-python",
         title = "Estruturas de Controle em Python",

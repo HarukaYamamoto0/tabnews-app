@@ -15,14 +15,14 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import com.harukadev.tabnews.data.Post
+import com.harukadev.tabnews.data.PostContent
 import com.harukadev.tabnews.ui.theme.Colors
 import com.harukadev.tabnews.ui.theme.Dimens
 import com.harukadev.tabnews.utils.fakeData.fakeData
 
 @Preview(showBackground = true)
 @Composable
-fun PostItem(index: Int = 0, post: Post = fakeData[0], onClick: () -> Unit = {}) {
+fun PostItem(index: Int = 0, postContent: PostContent = fakeData[0], onClick: () -> Unit = {}) {
     ConstraintLayout(
         modifier = Modifier
             .fillMaxWidth()
@@ -45,7 +45,7 @@ fun PostItem(index: Int = 0, post: Post = fakeData[0], onClick: () -> Unit = {})
         )
 
         Text(
-            text = post.title,
+            text = postContent.title,
             style = TextStyle(color = Colors.text, lineBreak = LineBreak.Simple),
             modifier = Modifier
                 .constrainAs(refTitle) {
@@ -64,10 +64,10 @@ fun PostItem(index: Int = 0, post: Post = fakeData[0], onClick: () -> Unit = {})
         )
 
         val infos = """
-            ${post.tabcoins} tabcoins
-            ${post.totalComments} comments
-            ${post.author}
-            ${post.createdAt}
+            ${postContent.tabcoins} tabcoins
+            ${postContent.comments} comments
+            ${postContent.ownerUsername}
+            ${postContent.createdAt}
         """.trimIndent().replace(Regex("\n"), " • ")
 
         Text(

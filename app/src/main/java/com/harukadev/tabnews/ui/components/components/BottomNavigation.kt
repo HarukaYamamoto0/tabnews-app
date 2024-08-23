@@ -5,8 +5,8 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material.BottomAppBar
+import androidx.compose.material.BottomNavigationItem
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -21,6 +21,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.harukadev.tabnews.R
 import com.harukadev.tabnews.ui.theme.Colors
+import kotlinx.serialization.Serializable
 
 sealed class Screen(
     val route: String,
@@ -40,9 +41,10 @@ sealed class Screen(
     data object Settings :
         Screen("Settings", R.string.settings, R.drawable.ic_manage_accounts)
 
+    @Serializable
     data object PostContent : Screen(
         "PostContent",
-        R.string.postcontent, R.drawable.ic_manage_accounts
+        R.string.postContent, R.drawable.ic_manage_accounts
     )
 }
 
@@ -55,7 +57,11 @@ val items = listOf(
 
 @Composable
 fun IconItem(@DrawableRes iconId: Int, contentDescription: String) {
-    Image(painter = painterResource(id = iconId), contentDescription)
+    Image(
+        painter = painterResource(id = iconId),
+        contentDescription,
+        modifier = Modifier.size(24.dp, 24.dp)
+    )
 }
 
 @Preview
@@ -64,10 +70,11 @@ fun BottomNavigationCustom(navController: NavController = rememberNavController(
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
-    NavigationBar(containerColor = Colors.onBackground) {
+    BottomAppBar(modifier = Modifier.height(64.dp), backgroundColor = Colors.onBackground) {
         items.forEach { screen ->
-            NavigationBarItem(
-                modifier = Modifier.size(width = 77.dp, 48.dp),
+            BottomNavigationItem(
+                modifier = Modifier.height(64.dp),
+                selectedContentColor = Colors.transparent,
                 icon = {
                     IconItem(
                         iconId = screen.iconId,

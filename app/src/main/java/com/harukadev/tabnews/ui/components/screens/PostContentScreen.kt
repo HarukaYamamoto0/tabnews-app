@@ -21,24 +21,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.harukadev.tabnews.api.TabNewsApi
-import com.harukadev.tabnews.data.Post
+import com.harukadev.tabnews.data.PostContent
 import com.harukadev.tabnews.ui.theme.Colors
 import com.harukadev.tabnews.ui.theme.Dimens
 import kotlinx.coroutines.runBlocking
 
 @Composable
-fun PostContentScreen(navController: NavHostController, modifier: Modifier = Modifier) {
-    PostContentScreenRaw(modifier)
+fun PostContentScreen(
+    navController: NavHostController,
+    modifier: Modifier = Modifier,
+    post: PostContent
+) {
+    PostContentScreenRaw(modifier, post)
 }
 
 @Composable
-fun PostContentScreenRaw(modifier: Modifier = Modifier) {
-    val (owner, slug) = arrayOf("HarukaYamamoto0", "crise-do-impostor")
-    lateinit var post: Post
-
+fun PostContentScreenRaw(modifier: Modifier = Modifier, post: PostContent) {
     ConstraintLayout(
         modifier
             .fillMaxSize()
@@ -47,16 +47,17 @@ fun PostContentScreenRaw(modifier: Modifier = Modifier) {
             .padding(0.dp)
             .padding(Dimens.paddingPostContent)
     ) {
-        val (refTabcoinLayout, refAuthor, refCreatedAt, refContent) = createRefs()
+        val (refTabCoinLayout, refAuthor, refCreatedAt, refContent) = createRefs()
+        lateinit var postContent: PostContent
 
         runBlocking {
             val api = TabNewsApi()
-            post = api.getPostFromUser(owner, slug)
+            postContent = api.getPostFromUser(post.ownerUsername, post.slug)
             api.close()
         }
 
         Column(
-            modifier = Modifier.constrainAs(refTabcoinLayout) {
+            modifier = Modifier.constrainAs(refTabCoinLayout) {
                 top.linkTo(parent.top)
                 start.linkTo(parent.start)
             },
@@ -65,9 +66,9 @@ fun PostContentScreenRaw(modifier: Modifier = Modifier) {
             Icon(Icons.Filled.KeyboardArrowUp, null, tint = Colors.onDarkIcon)
             Spacer(modifier = Modifier.padding(vertical = 7.dp))
             Text(
-                text = post.tabcoins.toString(), style = TextStyle(
+                text = postContent.tabcoins.toString(), style = TextStyle(
                     color = Colors.onText,
-                    fontSize = Dimens.fontSizeOfPostContentTabcoin,
+                    fontSize = Dimens.fontSizeOfPostContentTabCoin,
                 )
             )
             Spacer(modifier = Modifier.padding(vertical = 7.dp))
@@ -80,13 +81,13 @@ fun PostContentScreenRaw(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .constrainAs(refAuthor) {
                     top.linkTo(parent.top)
-                    start.linkTo(refTabcoinLayout.end)
+                    start.linkTo(refTabCoinLayout.end)
                 }
                 .padding(start = 15.dp, end = 7.dp)
                 .offset(y = (-5).dp)
         ) {
             Text(
-                text = post.author,
+                text = postContent.ownerUsername,
                 style = TextStyle(
                     color = Colors.onText,
                     fontSize = Dimens.fontSizeOfPostContentCreatedAt,
@@ -95,7 +96,7 @@ fun PostContentScreenRaw(modifier: Modifier = Modifier) {
         }
 
         Text(
-            text = post.createdAt,
+            text = postContent.createdAt,
             style = TextStyle(
                 color = Colors.onDarkText,
                 fontSize = Dimens.fontSizeOfPostContentCreatedAt
@@ -106,18 +107,13 @@ fun PostContentScreenRaw(modifier: Modifier = Modifier) {
             }
         )
 
-        post.body?.let {
-            Text(text = it, modifier = Modifier
-                .constrainAs(refContent) {
-                    top.linkTo(refAuthor.bottom)
-                    start.linkTo(refTabcoinLayout.end)
-                }
-                //.padding(start = 15.dp, top = 10.dp)
-                .padding(end = 10.dp))
-        }
+        Text(text = postContent.body, modifier = Modifier
+            .constrainAs(refContent) {
+                top.linkTo(refAuthor.bottom)
+                start.linkTo(refTabCoinLayout.end)
+            }
+            //.padding(start = 15.dp, top = 10.dp)
+            .padding(end = 10.dp))
+
     }
-}
-
-open class PostContentScreen {
-
 }

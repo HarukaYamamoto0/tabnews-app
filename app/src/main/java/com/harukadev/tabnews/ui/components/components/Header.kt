@@ -55,9 +55,9 @@ fun Header() {
         )
 
         Image(painter = painterResource(R.drawable.ic_tabcoin),
-            contentDescription = stringResource(R.string.tabcoin),
+            contentDescription = stringResource(R.string.tabCoin),
             modifier = Modifier
-                .size(10.dp)
+                .size(Dimens.coinIconSize)
                 .constrainAs(refTabcoinIcon) {
                     end.linkTo(refTabcoin.start)
                     top.linkTo(parent.top)
@@ -72,7 +72,7 @@ fun Header() {
                     end.linkTo(refTabCash.start)
                     top.linkTo(parent.top)
                     bottom.linkTo(parent.bottom)
-                }.padding(start = 5.dp, end = 20.dp),
+                }.padding(start = 5.dp, end = Dimens.paddingBetweenCoins),
             style = TextStyle(
                 color = Colors.text,
                 fontSize = Dimens.fontSizeOfSectionTitle
@@ -80,9 +80,9 @@ fun Header() {
         )
 
         Image(painter = painterResource(R.drawable.ic_tabcash),
-            contentDescription = stringResource(R.string.tabcash),
+            contentDescription = stringResource(R.string.tabCash),
             modifier = Modifier
-                .size(10.dp)
+                .size(Dimens.coinIconSize)
                 .constrainAs(refTabCashIcon) {
                     start.linkTo(refTabcoin.end)
                     end.linkTo(refTabCash.start)

@@ -51,7 +51,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion '1.5.1'
+        kotlinCompilerExtensionVersion '1.5.15'
     }
     packaging {
         resources {
@@ -83,6 +83,7 @@ dependencies {
     implementation libs.androidx.graphics.shapes
     implementation project(':app:marktocompose')
     implementation libs.androidx.material3.android
+    implementation libs.material
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core

@@ -12,6 +12,8 @@ val Pink40 = Color(0xFF7D5260)
 
 class Colors {
     companion object {
+        val transparent = Color.Transparent
+
         val primarySurface = Color(0xff121d2f)
         val strokeLine = Color(0xFF11141C)
         val background = Color(0xFF0D1017)

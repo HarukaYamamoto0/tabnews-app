@@ -11,7 +11,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.harukadev.tabnews.api.TabNewsApi
 import com.harukadev.tabnews.ui.components.components.Screen
-//import com.harukadev.tabnews.ui.components.activitys.PostContentNavigationItem
 import com.harukadev.tabnews.ui.components.items.PostItem
 import com.harukadev.tabnews.utils.fakeData.fakeData
 import kotlinx.coroutines.runBlocking
@@ -25,7 +24,7 @@ fun RelevantPostsScreen(navController: NavHostController) {
     ) {
         runBlocking {
             val api = TabNewsApi()
-            val posts = api.getPost(1, 20, TabNewsApi.PostStrategy.RELEVANT)
+            val posts = api.getPost(1, 20, TabNewsApi.ContentStrategy.RELEVANT)
             itemsIndexed(posts) { index, post ->
                 PostItem(index + 1, post, onClick = {
                     navController.navigate(Screen.PostContent.route)
