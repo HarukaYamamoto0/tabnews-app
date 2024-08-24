@@ -14,6 +14,7 @@ import com.harukadev.tabnews.data.PostContent
 import com.harukadev.tabnews.ui.components.components.PostContentRoute
 import com.harukadev.tabnews.ui.components.components.Screen
 import com.harukadev.tabnews.ui.components.items.PostItem
+import com.harukadev.tabnews.ui.theme.Dimens
 import kotlinx.coroutines.runBlocking
 
 @Composable
@@ -21,7 +22,7 @@ fun RelevantPostsScreen(navController: NavHostController) {
     LazyColumn(
         Modifier
             .fillMaxSize()
-            .padding(15.dp)
+            .padding(Dimens.paddingFeed)
     ) {
         runBlocking {
             val api = TabNewsApi()

@@ -17,6 +17,7 @@ class Dimens {
 
         // Paddings
         val paddingPostContent = PaddingValues(horizontal = 13.dp, vertical = 20.dp)
+        val paddingFeed = PaddingValues(horizontal = 15.dp)
         val paddingBetweenCoins = 29.5.dp
 
         // Icons Size
