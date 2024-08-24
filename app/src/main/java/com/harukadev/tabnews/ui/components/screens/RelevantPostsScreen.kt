@@ -7,18 +7,17 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.harukadev.tabnews.api.TabNewsApi
-import com.harukadev.tabnews.data.PostContent
 import com.harukadev.tabnews.ui.components.components.PostContentRoute
-import com.harukadev.tabnews.ui.components.components.Screen
 import com.harukadev.tabnews.ui.components.items.PostItem
+import com.harukadev.tabnews.ui.theme.Constants
 import com.harukadev.tabnews.ui.theme.Dimens
 import kotlinx.coroutines.runBlocking
 
 @Composable
-fun RelevantPostsScreen(navController: NavHostController) {
+private fun RelevantPostsScreenRaw(navController: NavHostController) {
     LazyColumn(
         Modifier
             .fillMaxSize()
@@ -26,7 +25,7 @@ fun RelevantPostsScreen(navController: NavHostController) {
     ) {
         runBlocking {
             val api = TabNewsApi()
-            val posts = api.getPost(1, 20, TabNewsApi.ContentStrategy.RELEVANT)
+            val posts = api.getPost(1, Constants.NUMBER_OF_POST_PER_PAGE, TabNewsApi.ContentStrategy.RELEVANT)
             itemsIndexed(posts) { index, post ->
                 PostItem(index + 1, post, onClick = {
                     navController.navigate(
@@ -40,4 +39,15 @@ fun RelevantPostsScreen(navController: NavHostController) {
             api.close()
         }
     }
+}
+
+@Composable
+fun RelevantPostsScreen(navController: NavHostController) {
+    RelevantPostsScreenRaw(navController = navController)
+}
+
+@Preview
+@Composable
+private fun RelevantPostsScreenPreview() {
+    RelevantPostsScreenRaw(navController = rememberNavController())
 }

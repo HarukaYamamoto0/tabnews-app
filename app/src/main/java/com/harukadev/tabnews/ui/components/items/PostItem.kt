@@ -12,14 +12,21 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.LineBreak
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.harukadev.tabnews.data.PostContent
 import com.harukadev.tabnews.ui.theme.Colors
 import com.harukadev.tabnews.ui.theme.Dimens
+import com.harukadev.tabnews.utils.fakedata.fakePosts
 
 @Composable
 fun PostItem(index: Int = 0, postContent: PostContent, onClick: () -> Unit = {}) {
+    PostItemRaw(postContent = postContent, index = index, onClick = onClick)
+}
+
+@Composable
+private fun PostItemRaw(index: Int = 0, postContent: PostContent, onClick: () -> Unit = {}) {
     ConstraintLayout(
         modifier = Modifier
             .fillMaxWidth()
@@ -83,4 +90,10 @@ fun PostItem(index: Int = 0, postContent: PostContent, onClick: () -> Unit = {})
             overflow = TextOverflow.Ellipsis,
         )
     }
+}
+
+@Preview
+@Composable
+private fun PostItemPreview() {
+    PostItemRaw(postContent = fakePosts[0], index = 1, onClick = { })
 }

@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.harukadev.tabnews.api.TabNewsApi
@@ -26,18 +27,11 @@ import com.harukadev.tabnews.data.PostContent
 import com.harukadev.tabnews.ui.components.components.PostContentRoute
 import com.harukadev.tabnews.ui.theme.Colors
 import com.harukadev.tabnews.ui.theme.Dimens
+import com.harukadev.tabnews.utils.fakedata.fakePosts
 import kotlinx.coroutines.runBlocking
 
 @Composable
-fun PostContentScreen(
-    args: PostContentRoute,
-    modifier: Modifier = Modifier,
-) {
-    PostContentScreenRaw(modifier, args)
-}
-
-@Composable
-fun PostContentScreenRaw(modifier: Modifier = Modifier, args: PostContentRoute) {
+private fun PostContentScreenRaw(modifier: Modifier = Modifier, args: PostContentRoute) {
     val (ownerUsername, slug) = args
     ConstraintLayout(
         modifier
@@ -121,4 +115,20 @@ fun PostContentScreenRaw(modifier: Modifier = Modifier, args: PostContentRoute) 
         )
 
     }
+}
+
+@Composable
+fun PostContentScreen(args: PostContentRoute, modifier: Modifier = Modifier) {
+    PostContentScreenRaw(modifier, args)
+}
+
+@Preview
+@Composable
+private fun PostContentScreenPreview() {
+    PostContentScreenRaw(
+        args = PostContentRoute(
+            ownerUsername = fakePosts[0].ownerUsername,
+            slug = fakePosts[0].slug
+        )
+    )
 }

@@ -1,6 +1,6 @@
 package com.harukadev.tabnews.data
 
-import com.harukadev.tabnews.utils.Constants
+import com.harukadev.tabnews.ui.theme.Constants
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
