@@ -21,7 +21,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.navigation.NavHostController
 import com.harukadev.tabnews.api.TabNewsApi
 import com.harukadev.tabnews.data.PostContent
 import com.harukadev.tabnews.ui.components.components.PostContentRoute

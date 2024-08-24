@@ -53,10 +53,10 @@ data class ContentRaw(
         return PostContent(
             body = body ?: Constants.STRING_NOTHING,
             comments = childrenDeepCount,
-            createdAt = createdAt,
-            deletedAt = deletedAt,
+            createdAtRaw = createdAt,
+            deletedAtRaw = deletedAt,
             ownerUsername = ownerUsername,
-            publishedAt = publishedAt,
+            publishedAtRaw = publishedAt,
             slug = slug,
             sourceUrl = sourceUrl,
             status = status,
@@ -65,7 +65,7 @@ data class ContentRaw(
             tabcoinsDebit = tabcoinsDebit,
             title = title,
             type = type,
-            updatedAt = updatedAt,
+            updatedAtRaw = updatedAt,
         )
     }
 }
