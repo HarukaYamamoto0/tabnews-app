@@ -21,5 +21,8 @@ class Dimens {
 
         // Icons Size
         val coinIconSize = 15.dp
+
+        // Height
+        val heightBottomNavigation = 64.dp
     }
 }
