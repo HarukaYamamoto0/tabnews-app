@@ -1,9 +1,14 @@
 package com.harukadev.tabnews.core.domain
 
+import kotlinx.serialization.Serializable
+
 typealias DomainError = Error
 
+@Serializable
 sealed interface Result<out D, out E : Error> {
+    @Serializable
     data class Success<out D>(val data: D) : Result<D, Nothing>
+    @Serializable
     data class Error<out E : DomainError>(val error: E) : Result<Nothing, E>
 }
 

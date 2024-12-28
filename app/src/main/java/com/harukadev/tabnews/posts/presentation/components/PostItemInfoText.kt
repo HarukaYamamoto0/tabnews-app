@@ -19,7 +19,7 @@ fun PostItemInfoText(
 ) {
     val defaultTextStyleOfInfos = LocalTextStyle.current.copy(
         lineBreak = LineBreak.Simple,
-        fontSize = 12.sp,
+        fontSize = 14.sp,
         color = MaterialTheme.colorScheme.onBackground
     )
 

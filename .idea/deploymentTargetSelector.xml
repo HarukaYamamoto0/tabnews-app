@@ -4,10 +4,10 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-12-27T13:15:22.172970602Z">
+        <DropdownSelection timestamp="2025-01-08T13:44:27.817811856Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=/home/harukadev/.android/avd/My_Cell_API_35.avd" />
+              <DeviceId pluginId="PhysicalDevice" identifier="serial=RX8M5018G6A" />
             </handle>
           </Target>
         </DropdownSelection>

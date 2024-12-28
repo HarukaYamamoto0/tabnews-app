@@ -11,8 +11,8 @@ android {
 
     defaultConfig {
         applicationId = "com.harukadev.tabnews"
-        minSdk = 26
-        targetSdk = 34
+        minSdk = 30
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -21,7 +21,8 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField("String", "BASE_URL", "\"https://www.tabnews.com.br/api/v1\"")
+            buildConfigField("String", "BASE_URL", "\"http://10.0.2.2:3000/api/v1\"")
+            buildConfigField("String", "TABNEWS_URL", "\"https://www.tabnews.com.br\"")
         }
         release {
             isMinifyEnabled = false
@@ -30,6 +31,7 @@ android {
                 "proguard-rules.pro"
             )
             buildConfigField("String", "BASE_URL", "\"https://www.tabnews.com.br/api/v1\"")
+            buildConfigField("String", "TABNEWS_URL", "\"https://www.tabnews.com.br\"")
         }
     }
     compileOptions {
@@ -72,6 +74,7 @@ dependencies {
     implementation(libs.koin.androidx.compose)
     implementation(libs.ktor.client.logging)
     implementation(libs.androidx.constraintlayout.compose)
+    implementation(libs.androidx.navigation.compose)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

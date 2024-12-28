@@ -20,6 +20,7 @@ koinComposeViewmodelNavigation = "4.1.0-Beta1"
 koinAndroidxCompose = "4.1.0-Beta1"
 ktorClientLogging = "3.0.3"
 constraintlayoutCompose = "1.1.0"
+navigationCompose = "2.9.0-alpha04"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -48,6 +49,7 @@ koin-compose-viewmodel-navigation = { group = "io.insert-koin", name = "koin-com
 koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koinAndroidxCompose" }
 ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktorClientLogging" }
 androidx-constraintlayout-compose = { group = "androidx.constraintlayout", name = "constraintlayout-compose", version.ref = "constraintlayoutCompose" }
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

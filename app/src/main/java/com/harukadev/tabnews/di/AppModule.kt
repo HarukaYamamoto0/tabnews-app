@@ -3,6 +3,7 @@ package com.harukadev.tabnews.di
 import com.harukadev.tabnews.core.data.networking.HttpClientFactory
 import com.harukadev.tabnews.posts.data.networking.RemotePostRepository
 import com.harukadev.tabnews.posts.domain.PostRepository
+import com.harukadev.tabnews.posts.presentation.content_post.PostContentViewModel
 import com.harukadev.tabnews.posts.presentation.relevant_posts.RelevantPostsViewModel
 import io.ktor.client.engine.cio.CIO
 import org.koin.core.module.dsl.bind
@@ -14,4 +15,5 @@ val appModule = module {
     single { HttpClientFactory.create(CIO.create()) }
     singleOf(::RemotePostRepository) { bind<PostRepository>() }
     viewModelOf(::RelevantPostsViewModel)
+    viewModelOf(::PostContentViewModel)
 }

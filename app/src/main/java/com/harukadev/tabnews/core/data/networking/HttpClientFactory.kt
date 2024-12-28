@@ -2,6 +2,7 @@ package com.harukadev.tabnews.core.data.networking
 
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine
+import io.ktor.client.plugins.cache.HttpCache
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.plugins.logging.ANDROID
@@ -18,13 +19,14 @@ object HttpClientFactory {
         return HttpClient(engine) {
             install(Logging) {
                 logger = Logger.ANDROID
-                level = LogLevel.ALL
+//                level = LogLevel.ALL
             }
             install(ContentNegotiation) {
                 json(json = Json {
                     ignoreUnknownKeys = true
                 })
             }
+            install(HttpCache)
             defaultRequest {
                 contentType(ContentType.Application.Json)
             }

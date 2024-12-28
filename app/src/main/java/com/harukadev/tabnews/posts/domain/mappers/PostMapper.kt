@@ -1,10 +1,12 @@
 package com.harukadev.tabnews.posts.domain.mappers
 
-import com.harukadev.tabnews.posts.data.networking.dto.PostDto
-import com.harukadev.tabnews.posts.domain.Post
+import com.harukadev.tabnews.posts.data.networking.dto.CardPostDto
+import com.harukadev.tabnews.posts.data.networking.dto.PostContentDto
+import com.harukadev.tabnews.posts.domain.CardPost
+import com.harukadev.tabnews.posts.domain.PostContent
 
-fun PostDto.toPost(): Post {
-    return Post(
+fun CardPostDto.toPost(): CardPost {
+    return CardPost(
         id = id,
         ownerUsername = ownerUsername,
         slug = slug,
@@ -17,5 +19,28 @@ fun PostDto.toPost(): Post {
         tabcoinsCredit = tabcoinsCredit,
         tabcoinsDebit = tabcoinsDebit,
         updatedAt = updatedAt,
+    )
+}
+
+fun PostContentDto.toPostContent(): PostContent {
+    return PostContent(
+        type = type,
+        id = id,
+        ownerId = ownerId,
+        parentId = parentId,
+        ownerUsername = ownerUsername,
+        slug = slug,
+        title = title,
+        body = body,
+        comments = comments,
+        sourceUrl = sourceUrl,
+        status = status,
+        tabcoins = tabcoins,
+        tabcoinsCredit = tabcoinsCredit,
+        tabcoinsDebit = tabcoinsDebit,
+        createdAt = createdAt,
+        deletedAt = deletedAt,
+        publishedAt = publishedAt,
+        updatedAt = updatedAt
     )
 }

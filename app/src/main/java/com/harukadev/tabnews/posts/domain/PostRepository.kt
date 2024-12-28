@@ -2,6 +2,7 @@ package com.harukadev.tabnews.posts.domain
 
 import com.harukadev.tabnews.core.data.networking.NetworkError
 import com.harukadev.tabnews.core.domain.Result
+import com.harukadev.tabnews.posts.data.networking.dto.PostContentDto
 
 object Strategy {
     const val NEW = "new"
@@ -11,13 +12,13 @@ object Strategy {
 
 interface PostRepository {
     suspend fun getPost(
-        username: String,
+        ownerUsername: String,
         slug: String
-    ): Result<Post, NetworkError>
+    ): Result<PostContentDto, NetworkError>
 
     suspend fun getPosts(
         page: Int,
         perPage: Int,
         strategy: String
-    ): Result<List<Post>, NetworkError>
+    ): Result<List<CardPost>, NetworkError>
 }

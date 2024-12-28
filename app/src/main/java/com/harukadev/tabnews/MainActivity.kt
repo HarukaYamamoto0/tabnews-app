@@ -1,7 +1,6 @@
 package com.harukadev.tabnews
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -10,50 +9,35 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.harukadev.tabnews.core.presentation.ObserverAsEvents
-import com.harukadev.tabnews.core.presentation.toString
-import com.harukadev.tabnews.posts.presentation.relevant_posts.RelevantPostsEvent
-import com.harukadev.tabnews.posts.presentation.relevant_posts.RelevantPostsScreen
-import com.harukadev.tabnews.posts.presentation.relevant_posts.RelevantPostsViewModel
+import androidx.navigation.compose.rememberNavController
+import com.harukadev.tabnews.core.navigation.AppNavHost
+import com.harukadev.tabnews.core.navigation.CustomBottomAppBar
+import com.harukadev.tabnews.core.navigation.CustomTopAppBar
 import com.harukadev.tabnews.ui.theme.AppTheme
-import org.koin.androidx.compose.koinViewModel
+import org.koin.compose.KoinContext
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            AppTheme {
-                Scaffold(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(MaterialTheme.colorScheme.background)
-                ) { innerPadding ->
-                    val viewModel: RelevantPostsViewModel = koinViewModel()
-                    val state by viewModel.state.collectAsStateWithLifecycle()
+            KoinContext {
+                AppTheme {
+                    Scaffold(
+                        topBar = { CustomTopAppBar() },
+                        bottomBar = { CustomBottomAppBar() },
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(MaterialTheme.colorScheme.background),
+                    ) { innerPadding ->
+                        val navController = rememberNavController()
 
-                    val context = LocalContext.current
-
-                    ObserverAsEvents(viewModel.events) { event ->
-                        when (event) {
-                            is RelevantPostsEvent.Error -> {
-                                Toast.makeText(
-                                    context,
-                                    event.error.toString(context),
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        }
+                        AppNavHost(
+                            navController = navController,
+                            modifier = Modifier.padding(innerPadding)
+                        )
                     }
-
-                    RelevantPostsScreen(
-                        modifier = Modifier.padding(innerPadding),
-                        state = state
-                    )
                 }
             }
         }
