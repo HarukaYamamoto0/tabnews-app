@@ -27,7 +27,7 @@ import com.harukadev.tabnews.ui.theme.AppTheme
 import com.harukadev.tabnews.ui.theme.darkGreen
 
 @Composable
-fun NoPosts(
+fun NoPostsScreen(
     modifier: Modifier = Modifier
 ) {
     val contentColor = if (isSystemInDarkTheme())
@@ -76,6 +76,6 @@ fun NoPosts(
 @Composable
 private fun NoPostsPreview() {
     AppTheme {
-        NoPosts()
+        NoPostsScreen()
     }
 }

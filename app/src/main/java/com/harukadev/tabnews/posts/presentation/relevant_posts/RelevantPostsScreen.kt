@@ -13,7 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.harukadev.tabnews.posts.presentation.components.NoPosts
+import com.harukadev.tabnews.posts.presentation.components.NoPostsScreen
 import com.harukadev.tabnews.posts.presentation.components.PostItem
 import com.harukadev.tabnews.posts.presentation.components.previewPostUi
 
@@ -45,7 +45,7 @@ fun RelevantPostsScreen(
                 }
             }
         } else {
-            NoPosts()
+            NoPostsScreen()
         }
     }
 }
