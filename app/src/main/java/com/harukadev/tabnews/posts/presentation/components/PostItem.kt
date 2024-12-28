@@ -3,28 +3,30 @@ package com.harukadev.tabnews.posts.presentation.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.LineBreak
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.DpOffset
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Popup
+import androidx.compose.ui.window.PopupProperties
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.harukadev.tabnews.posts.presentation.models.PostUi
 import com.harukadev.tabnews.posts.presentation.models.toDisplayableDate
@@ -93,25 +95,30 @@ fun PostItem(
             fontSize = 12.sp,
             color = MaterialTheme.colorScheme.onBackground
         )
+        val divider = " • "
 
-        val infos = """
-            ${post.tabcoins} tabcoins
-            ${post.comments} comments
-            ${post.ownerUsername}
-            ${post.createdAt.formatted}
-        """.trimIndent().replace(Regex("\n"), " • ")
-
-        Text(
-            text = infos,
-            style = defaultTextStyleOfInfos,
+        FlowRow(
             modifier = Modifier.constrainAs(refRowInfos) {
                 start.linkTo(refTextPosition.end)
                 top.linkTo(refTextTitle.bottom)
                 bottom.linkTo(parent.bottom)
-            },
-            overflow = TextOverflow.Ellipsis,
-        )
+            }
+        ) {
+            PostItemInfoText(
+                text = "${post.tabcoins} tabcoins$divider",
+            )
+            PostItemInfoText(
+                text = "${post.comments} comments$divider",
+            )
+            PostItemInfoText(
+                text = post.ownerUsername + divider,
+            )
+            PostItemInfoText(
+                text = post.createdAt.formatted,
+            )
+        }
     }
+}
 //
 //
 //    Row(
@@ -172,7 +179,6 @@ fun PostItem(
 //                )
 //            }
 //        }
-}
 
 
 @PreviewLightDark

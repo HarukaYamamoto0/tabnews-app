@@ -1,6 +1,5 @@
 package com.harukadev.tabnews.posts.presentation.relevant_posts
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.harukadev.tabnews.core.domain.onError
@@ -37,7 +36,7 @@ class RelevantPostsViewModel(
             _state.update { it.copy(isLoading = true) }
 
             postRepository
-                .getPosts(page = 1, perPage = 60, Strategy.RELEVANT)
+                .getPosts(page = 1, perPage = 30, Strategy.RELEVANT)
                 .onSuccess { posts ->
                     _state.update {
                         it.copy(
