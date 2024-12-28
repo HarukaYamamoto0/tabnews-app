@@ -71,6 +71,7 @@ dependencies {
     implementation(libs.koin.compose.viewmodel.navigation)
     implementation(libs.koin.androidx.compose)
     implementation(libs.ktor.client.logging)
+    implementation(libs.androidx.constraintlayout.compose)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -18,12 +18,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.LineBreak
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.constraintlayout.compose.ConstraintLayout
 import com.harukadev.tabnews.posts.presentation.models.PostUi
 import com.harukadev.tabnews.posts.presentation.models.toDisplayableDate
 import com.harukadev.tabnews.ui.theme.AppTheme
@@ -43,71 +45,135 @@ fun PostItem(
 
     val defaultTextStyle = LocalTextStyle.current.copy(
         fontSize = 16.sp,
-        fontWeight = FontWeight.SemiBold,
         lineBreak = LineBreak.Simple,
         color = contentColor
     )
 
-    Row(
-        modifier = modifier
+    ConstraintLayout(
+        modifier = Modifier
             .fillMaxWidth()
             .background(MaterialTheme.colorScheme.background)
             .clip(RoundedCornerShape(8.dp))
-            .clickable { onClick() }
-            .padding(bottom = 7.dp, top = 5.dp)
+            .clickable {
+                onClick()
+            }
+            .padding(bottom = 12.dp, top = 5.dp)
     ) {
+        val (refTextPosition, refTextTitle, refRowInfos) = createRefs()
+
         Text(
             text = "$position.",
-            modifier = modifier.defaultMinSize(minWidth = 28.dp),
+            modifier = Modifier
+                .constrainAs(refTextPosition) {
+                    start.linkTo(parent.start)
+                    top.linkTo(parent.top)
+                    end.linkTo(refTextTitle.start)
+                }
+                .defaultMinSize(minWidth = 28.dp),
             style = defaultTextStyle
         )
 
-        Column(
-            modifier = Modifier.weight(1f)
-        ) {
-            Text(
-                text = post.title,
-                style = defaultTextStyle,
-                modifier = Modifier.padding(end = 20.dp),
-                maxLines = 3,
-                overflow = TextOverflow.Ellipsis,
-            )
+        Text(
+            text = post.title,
+            modifier = Modifier
+                .constrainAs(refTextTitle) {
+                    start.linkTo(refTextPosition.end)
+                    top.linkTo(parent.top)
+                    bottom.linkTo(refRowInfos.top)
+                }
+                .padding(end = 30.dp)
+                .padding(bottom = 5.dp),
+            style = defaultTextStyle,
+            maxLines = 3,
+            overflow = TextOverflow.Ellipsis,
+        )
 
-            val defaultTextStyleOfInfos = defaultTextStyle.copy(
-                fontWeight = FontWeight.Normal,
-                fontSize = 12.sp,
-                color = MaterialTheme.colorScheme.onBackground
-            )
-            val divider = " • "
+        val defaultTextStyleOfInfos = LocalTextStyle.current.copy(
+            lineBreak = LineBreak.Simple,
+            fontSize = 12.sp,
+            color = MaterialTheme.colorScheme.onBackground
+        )
 
-            FlowRow(
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(
-                    text = "${post.tabcoins} tabcoins",
-                    style = defaultTextStyleOfInfos
-                )
-                Text(
-                    text = "$divider${post.comments} comments",
-                    style = defaultTextStyleOfInfos
-                )
-                Text(
-                    text = divider + post.ownerUsername,
-                    style = defaultTextStyleOfInfos,
-                    maxLines = 2,
+        val infos = """
+            ${post.tabcoins} tabcoins
+            ${post.comments} comments
+            ${post.ownerUsername}
+            ${post.createdAt.formatted}
+        """.trimIndent().replace(Regex("\n"), " • ")
 
-                    overflow = TextOverflow.Ellipsis
-                )
-                Text(
-                    text = divider + post.createdAt.formatted,
-                    style = defaultTextStyleOfInfos,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
-                )
-            }
-        }
+        Text(
+            text = infos,
+            style = defaultTextStyleOfInfos,
+            modifier = Modifier.constrainAs(refRowInfos) {
+                start.linkTo(refTextPosition.end)
+                top.linkTo(refTextTitle.bottom)
+                bottom.linkTo(parent.bottom)
+            },
+            overflow = TextOverflow.Ellipsis,
+        )
     }
+//
+//
+//    Row(
+//        modifier = modifier
+//            .fillMaxWidth()
+//            .background(MaterialTheme.colorScheme.background)
+//            .clip(RoundedCornerShape(8.dp))
+//            .clickable { onClick() }
+//            .padding(bottom = 7.dp, top = 5.dp)
+//    ) {
+//        Text(
+//            text = "$position.",
+//            modifier = modifier.defaultMinSize(minWidth = 28.dp),
+//            style = defaultTextStyle
+//        )
+//
+//        Column(
+//            modifier = Modifier.weight(1f)
+//        ) {
+//            Text(
+//                text = post.title,
+//                style = defaultTextStyle,
+//                modifier = Modifier.padding(end = 10.dp),
+//                maxLines = 3,
+//                overflow = TextOverflow.Ellipsis,
+//            )
+//
+//            val defaultTextStyleOfInfos = defaultTextStyle.copy(
+//                fontWeight = FontWeight.Normal,
+//                fontSize = 12.sp,
+//                color = MaterialTheme.colorScheme.onBackground
+//            )
+//            val divider = " • "
+//
+//            FlowRow(
+//                modifier = Modifier.fillMaxWidth()
+//            ) {
+//                Text(
+//                    text = "${post.tabcoins} tabcoins",
+//                    style = defaultTextStyleOfInfos
+//                )
+//                Text(
+//                    text = "$divider${post.comments} comments",
+//                    style = defaultTextStyleOfInfos
+//                )
+//                Text(
+//                    text = divider + post.ownerUsername,
+//                    style = defaultTextStyleOfInfos,
+//                    maxLines = 2,
+//
+//                    overflow = TextOverflow.Ellipsis
+//                )
+//                Text(
+//                    text = divider + post.createdAt.formatted,
+//                    style = defaultTextStyleOfInfos,
+//                    maxLines = 2,
+//                    overflow = TextOverflow.Ellipsis
+//                )
+//            }
+//        }
 }
+
 
 @PreviewLightDark
 @Composable
