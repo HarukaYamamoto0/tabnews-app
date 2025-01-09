@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.harukadev.tabnews.posts.domain.fakePost
+import com.harukadev.tabnews.posts.presentation.components.PostNotFound
 import com.harukadev.tabnews.posts.presentation.content_post.components.PostContentHeader
 import com.harukadev.tabnews.posts.presentation.content_post.components.PostContentVote
 import com.harukadev.tabnews.posts.presentation.models.toDisplayableDate
@@ -100,6 +101,8 @@ fun PostContentScreen(
                     )
                 }
             }
+        } else {
+            PostNotFound()
         }
     }
 }
