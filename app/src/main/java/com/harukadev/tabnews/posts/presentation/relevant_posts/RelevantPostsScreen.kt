@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -22,16 +23,16 @@ import com.harukadev.tabnews.core.presentation.toString
 import com.harukadev.tabnews.posts.presentation.components.NoPostsScreen
 import com.harukadev.tabnews.posts.presentation.components.PostItem
 import com.harukadev.tabnews.posts.presentation.models.CardPostUi
+import com.harukadev.tabnews.posts.presentation.recent_posts.RecentPostsViewModel
 import com.harukadev.tabnews.ui.theme.AppTheme
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun RelevantPostsScreen(
-    modifier: Modifier = Modifier
-        .background(MaterialTheme.colorScheme.background),
+    modifier: Modifier = Modifier,
     onPostSelected: (CardPostUi) -> Unit = {}
 ) {
-    val viewModel: RelevantPostsViewModel = koinViewModel()
+    val viewModel: RecentPostsViewModel = koinViewModel()
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     val context = LocalContext.current
@@ -48,32 +49,39 @@ fun RelevantPostsScreen(
         }
     }
 
-    if (state.isLoading) {
-        Box(
-            modifier = modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
-            CircularProgressIndicator()
-        }
-    } else {
-        if (state.posts.isNotEmpty()) {
-            LazyColumn(
-                modifier = modifier
-                    .fillMaxSize()
-                    .padding(horizontal = 16.dp)
+
+    Surface(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
+    ) {
+        if (state.isLoading) {
+            Box(
+                modifier = modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
             ) {
-                itemsIndexed(state.posts) { index, post ->
-                    PostItem(
-                        position = index + 1,
-                        post = post,
-                        onClick = {
-                            onPostSelected(post)
-                        }
-                    )
-                }
+                CircularProgressIndicator()
             }
         } else {
-            NoPostsScreen()
+            if (state.posts.isNotEmpty()) {
+                LazyColumn(
+                    modifier = modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 16.dp)
+                ) {
+                    itemsIndexed(state.posts) { index, post ->
+                        PostItem(
+                            position = index + 1,
+                            post = post,
+                            onClick = {
+                                onPostSelected(post)
+                            }
+                        )
+                    }
+                }
+            } else {
+                NoPostsScreen()
+            }
         }
     }
 }

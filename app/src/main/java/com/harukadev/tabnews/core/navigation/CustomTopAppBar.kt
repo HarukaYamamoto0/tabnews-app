@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -37,6 +38,7 @@ fun CustomTopAppBar(modifier: Modifier = Modifier) {
             .defaultMinSize(minHeight = 64.dp)
             .background(MaterialTheme.colorScheme.surfaceContainer)
             .padding(horizontal = 16.dp)
+            .statusBarsPadding()
     ) {
         val context = LocalContext.current
         val intent by lazy {

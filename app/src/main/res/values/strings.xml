@@ -14,5 +14,7 @@
     <string name="hint_downvote_this_post">Você quer votar negativamente nesta publicação?</string>
     <string name="hint_upvote_this_post">Do you want to upvote this post?</string>
     <string name="preview_title_post_content">📟 Introdução ao Spectre.Console: Criando Interfaces de Linha de Comando Modernas e Elegantes 📦</string>
-    <string name="post_not_found">This post could not be found...</string>
+    <string name="post_not_found">This post could not be found…</string>
+    <string name="relevant">Relevant</string>
+    <string name="recents">Recents</string>
 </resources>

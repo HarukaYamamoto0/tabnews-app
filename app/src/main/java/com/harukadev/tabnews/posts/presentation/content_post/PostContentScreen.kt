@@ -50,14 +50,13 @@ fun PostContentScreen(
             ) {
                 val (voteLayoutRef, headerLayoutRef, contentLayoutRef) = createRefs()
 
-
                 PostContentVote(
                     modifier = Modifier
                         .fillMaxHeight()
                         .constrainAs(voteLayoutRef) {
                             start.linkTo(parent.start)
                             top.linkTo(parent.top)
-                            bottom.linkTo(parent.bottom)
+                            bottom.linkTo(contentLayoutRef.bottom)
                             height = Dimension.fillToConstraints
                         }
                         .padding(top = 16.dp, end = 7.dp, bottom = 16.dp),
@@ -79,7 +78,6 @@ fun PostContentScreen(
                     .constrainAs(contentLayoutRef) {
                         start.linkTo(voteLayoutRef.end)
                         top.linkTo(headerLayoutRef.bottom)
-                        bottom.linkTo(parent.bottom)
                         end.linkTo(parent.end)
                         width = Dimension.fillToConstraints
                     }

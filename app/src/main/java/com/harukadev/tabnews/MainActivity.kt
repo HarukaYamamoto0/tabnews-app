@@ -24,18 +24,19 @@ class MainActivity : ComponentActivity() {
         setContent {
             KoinContext {
                 AppTheme {
+                    val navController = rememberNavController()
+
                     Scaffold(
                         topBar = { CustomTopAppBar() },
-                        bottomBar = { CustomBottomAppBar() },
+                        bottomBar = {
+                            CustomBottomAppBar(navController)
+                        },
                         modifier = Modifier
                             .fillMaxSize()
                             .background(MaterialTheme.colorScheme.background),
                     ) { innerPadding ->
-                        val navController = rememberNavController()
-
                         AppNavHost(
-                            navController = navController,
-                            modifier = Modifier.padding(innerPadding)
+                            navController = navController, modifier = Modifier.padding(innerPadding)
                         )
                     }
                 }

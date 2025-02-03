@@ -7,6 +7,7 @@ import com.harukadev.tabnews.core.domain.onSuccess
 import com.harukadev.tabnews.posts.domain.PostRepository
 import com.harukadev.tabnews.posts.domain.Strategy
 import com.harukadev.tabnews.posts.presentation.models.toCardPostUi
+import com.harukadev.tabnews.posts.presentation.recent_posts.RecentPostsState
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -19,13 +20,13 @@ import kotlinx.coroutines.launch
 class RelevantPostsViewModel(
     private val postRepository: PostRepository
 ) : ViewModel() {
-    private val _state = MutableStateFlow(RelevantPostsState())
+    private val _state = MutableStateFlow(RecentPostsState())
     val state = _state
         .onStart { loadPosts() }
         .stateIn(
             viewModelScope,
             SharingStarted.WhileSubscribed(3000L),
-            RelevantPostsState()
+            RecentPostsState()
         )
 
     private val _events = Channel<RelevantPostsEvent>()
