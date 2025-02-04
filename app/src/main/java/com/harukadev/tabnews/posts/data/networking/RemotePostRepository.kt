@@ -9,6 +9,7 @@ import com.harukadev.tabnews.posts.data.networking.dto.CardPostDto
 import com.harukadev.tabnews.posts.data.networking.dto.PostContentDto
 import com.harukadev.tabnews.posts.domain.CardPost
 import com.harukadev.tabnews.posts.domain.PostRepository
+import com.harukadev.tabnews.posts.domain.Strategy
 import com.harukadev.tabnews.posts.domain.mappers.toPost
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
@@ -28,10 +29,12 @@ class RemotePostRepository(
     override suspend fun getPosts(
         page: Int,
         perPage: Int,
-        strategy: String
+        strategy: Strategy
     ): Result<List<CardPost>, NetworkError> {
+        val strategyValue = strategy.value
+
         return safeCall<List<CardPostDto>> {
-            httpClient.get(constructUrl("/contents?page=$page&per_page=$perPage&strategy=$strategy"))
+            httpClient.get(constructUrl("/contents?page=$page&per_page=$perPage&strategy=$strategyValue"))
         }.map { response ->
             response.map { it.toPost() }
         }

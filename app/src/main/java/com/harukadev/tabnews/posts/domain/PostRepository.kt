@@ -4,10 +4,10 @@ import com.harukadev.tabnews.core.data.networking.NetworkError
 import com.harukadev.tabnews.core.domain.Result
 import com.harukadev.tabnews.posts.data.networking.dto.PostContentDto
 
-object Strategy {
-    const val NEW = "new"
-    const val OLD = "old"
-    const val RELEVANT = "relevant"
+enum class Strategy(val value: String) {
+    NEW("new"),
+    OLD("old"),
+    RELEVANT("relevant")
 }
 
 interface PostRepository {
@@ -19,6 +19,6 @@ interface PostRepository {
     suspend fun getPosts(
         page: Int,
         perPage: Int,
-        strategy: String
+        strategy: Strategy
     ): Result<List<CardPost>, NetworkError>
 }

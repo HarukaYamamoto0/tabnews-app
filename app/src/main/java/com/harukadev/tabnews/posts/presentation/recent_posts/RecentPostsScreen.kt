@@ -39,7 +39,7 @@ fun RecentPostsScreen(
 
     ObserverAsEvents(viewModel.events) { event ->
         when (event) {
-            is RelevantPostsEvent.Error -> {
+            is RecentPostsEvent.Error -> {
                 Toast.makeText(
                     context,
                     event.error.toString(context),

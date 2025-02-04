@@ -5,6 +5,7 @@ import com.harukadev.tabnews.posts.data.networking.RemotePostRepository
 import com.harukadev.tabnews.posts.domain.PostRepository
 import com.harukadev.tabnews.posts.presentation.content_post.PostContentViewModel
 import com.harukadev.tabnews.posts.presentation.recent_posts.RecentPostsViewModel
+import com.harukadev.tabnews.posts.presentation.relevant_posts.RelevantPostsViewModel
 import io.ktor.client.engine.cio.CIO
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
@@ -14,6 +15,7 @@ import org.koin.dsl.module
 val appModule = module {
     single { HttpClientFactory.create(CIO.create()) }
     singleOf(::RemotePostRepository) { bind<PostRepository>() }
+    viewModelOf(::RelevantPostsViewModel)
     viewModelOf(::RecentPostsViewModel)
     viewModelOf(::PostContentViewModel)
 }

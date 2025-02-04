@@ -23,7 +23,6 @@ import com.harukadev.tabnews.core.presentation.toString
 import com.harukadev.tabnews.posts.presentation.components.NoPostsScreen
 import com.harukadev.tabnews.posts.presentation.components.PostItem
 import com.harukadev.tabnews.posts.presentation.models.CardPostUi
-import com.harukadev.tabnews.posts.presentation.recent_posts.RecentPostsViewModel
 import com.harukadev.tabnews.ui.theme.AppTheme
 import org.koin.androidx.compose.koinViewModel
 
@@ -32,7 +31,7 @@ fun RelevantPostsScreen(
     modifier: Modifier = Modifier,
     onPostSelected: (CardPostUi) -> Unit = {}
 ) {
-    val viewModel: RecentPostsViewModel = koinViewModel()
+    val viewModel: RelevantPostsViewModel = koinViewModel()
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     val context = LocalContext.current
