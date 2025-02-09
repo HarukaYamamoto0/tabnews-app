@@ -21,14 +21,13 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField("String", "BASE_URL", "\"https://www.tabnews.com.br/api/v1\"")
+            buildConfigField("String", "BASE_URL", "\"http://10.0.2.2:3000/api/v1\"")
             buildConfigField("String", "TABNEWS_URL", "\"https://www.tabnews.com.br\"")
         }
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
             buildConfigField("String", "BASE_URL", "\"https://www.tabnews.com.br/api/v1\"")
             buildConfigField("String", "TABNEWS_URL", "\"https://www.tabnews.com.br\"")
