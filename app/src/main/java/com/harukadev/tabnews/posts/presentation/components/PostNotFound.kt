@@ -1,5 +1,6 @@
 package com.harukadev.tabnews.posts.presentation.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -30,16 +32,16 @@ import com.harukadev.tabnews.ui.theme.darkGreen
 fun PostNotFound(
     modifier: Modifier = Modifier
 ) {
-    val contentColor = if (isSystemInDarkTheme())
-        Color.White
+    val contentColor = if (isSystemInDarkTheme()) Color.White
     else Color.Black
 
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(16.dp)
+            .background(MaterialTheme.colorScheme.background),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Icon(
             imageVector = ImageVector.vectorResource(R.drawable.forest),
@@ -50,18 +52,15 @@ fun PostNotFound(
             tint = darkGreen
         )
         Text(
-            text = stringResource(R.string.no_content_found),
-            style = TextStyle(
+            text = stringResource(R.string.no_content_found), style = TextStyle(
                 fontSize = 32.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = contentColor,
                 textAlign = TextAlign.Center
-            ),
-            modifier = Modifier.padding(bottom = 5.dp)
+            ), modifier = Modifier.padding(bottom = 5.dp)
         )
         Text(
-            text = stringResource(R.string.post_not_found),
-            style = TextStyle(
+            text = stringResource(R.string.post_not_found), style = TextStyle(
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Normal,
                 color = contentColor.copy(alpha = .5f),

@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.Color
 
 val darkGreen = Color(0xFF06402B)
 val accentColor = Color(0xff2f81f7)
+val snow = Color(0xfffffafa)
 
 val primaryLight = Color(0xFF006E21)
 val onPrimaryLight = Color(0xFFFFFFFF)

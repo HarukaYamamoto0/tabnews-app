@@ -14,7 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import com.harukadev.tabnews.core.navigation.AppNavHost
 import com.harukadev.tabnews.core.navigation.CustomBottomAppBar
 import com.harukadev.tabnews.core.navigation.CustomTopAppBar
-import com.harukadev.tabnews.core.navigation.items
+import com.harukadev.tabnews.core.navigation.bottomNavigationItems
 import com.harukadev.tabnews.ui.theme.AppTheme
 import org.koin.compose.KoinContext
 
@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity() {
                     Scaffold(
                         topBar = { CustomTopAppBar() },
                         bottomBar = {
-                            CustomBottomAppBar(navController = navController, items = items)
+                            CustomBottomAppBar(navController = navController, items = bottomNavigationItems)
                         },
                         modifier = Modifier
                             .fillMaxSize()

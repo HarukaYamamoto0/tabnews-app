@@ -66,6 +66,7 @@ fun RelevantPostsScreen(
                 LazyColumn(
                     modifier = modifier
                         .fillMaxSize()
+                        .background(MaterialTheme.colorScheme.tertiary)
                         .padding(horizontal = 16.dp)
                 ) {
                     itemsIndexed(state.posts) { index, post ->

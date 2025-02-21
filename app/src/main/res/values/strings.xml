@@ -17,4 +17,6 @@
     <string name="post_not_found">This post could not be found…</string>
     <string name="relevant">Relevant</string>
     <string name="recents">Recents</string>
+    <string name="notifications">Notifications</string>
+    <string name="settings">Settings</string>
 </resources>
