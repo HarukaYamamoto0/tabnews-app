@@ -46,10 +46,9 @@ fun PostItem(
     )
 
     ConstraintLayout(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .background(MaterialTheme.colorScheme.background)
-            .clip(RoundedCornerShape(8.dp))
             .clickable {
                 onClick()
             }

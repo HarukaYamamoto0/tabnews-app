@@ -3,7 +3,9 @@ package com.harukadev.tabnews.posts.presentation.recent_posts
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -28,8 +30,7 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun RecentPostsScreen(
-    modifier: Modifier = Modifier
-        .background(MaterialTheme.colorScheme.background),
+    modifier: Modifier = Modifier,
     onPostSelected: (CardPostUi) -> Unit = {}
 ) {
     val viewModel: RecentPostsViewModel = koinViewModel()
@@ -41,9 +42,7 @@ fun RecentPostsScreen(
         when (event) {
             is RecentPostsEvent.Error -> {
                 Toast.makeText(
-                    context,
-                    event.error.toString(context),
-                    Toast.LENGTH_LONG
+                    context, event.error.toString(context), Toast.LENGTH_LONG
                 ).show()
             }
         }
@@ -51,7 +50,9 @@ fun RecentPostsScreen(
 
     if (state.isLoading) {
         Box(
-            modifier = modifier.fillMaxSize(),
+            modifier = modifier
+                .background(MaterialTheme.colorScheme.tertiary)
+                .fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
             CircularProgressIndicator()
@@ -60,17 +61,13 @@ fun RecentPostsScreen(
         if (state.posts.isNotEmpty()) {
             LazyColumn(
                 modifier = modifier
+                    .background(MaterialTheme.colorScheme.tertiary)
                     .fillMaxSize()
-                    .padding(horizontal = 16.dp)
             ) {
                 itemsIndexed(state.posts) { index, post ->
-                    PostItem(
-                        position = index + 1,
-                        post = post,
-                        onClick = {
-                            onPostSelected(post)
-                        }
-                    )
+                    PostItem(position = index + 1, post = post, onClick = {
+                        onPostSelected(post)
+                    })
                 }
             }
         } else {
