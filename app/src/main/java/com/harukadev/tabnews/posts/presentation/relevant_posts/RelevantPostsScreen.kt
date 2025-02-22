@@ -29,8 +29,7 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun RelevantPostsScreen(
-    modifier: Modifier = Modifier,
-    onPostSelected: (CardPostUi) -> Unit = {}
+    modifier: Modifier = Modifier, onPostSelected: (CardPostUi) -> Unit = {}
 ) {
     val viewModel: RelevantPostsViewModel = koinViewModel()
     val state by viewModel.state.collectAsStateWithLifecycle()
@@ -41,55 +40,43 @@ fun RelevantPostsScreen(
         when (event) {
             is RelevantPostsEvent.Error -> {
                 Toast.makeText(
-                    context,
-                    event.error.toString(context),
-                    Toast.LENGTH_LONG
+                    context, event.error.toString(context), Toast.LENGTH_LONG
                 ).show()
             }
         }
     }
 
 
-    Surface(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-    ) {
-        if (state.isLoading) {
-            Box(
-                modifier = modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
+    if (state.isLoading) {
+        Box(
+            modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center
+        ) {
+            CircularProgressIndicator()
+        }
+    } else {
+        if (state.posts.isNotEmpty()) {
+            LazyColumn(
+                modifier = modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colorScheme.tertiary)
+                    .padding(horizontal = 16.dp)
             ) {
-                CircularProgressIndicator()
+                itemsIndexed(state.posts) { index, post ->
+                    PostItem(position = index + 1, post = post, onClick = {
+                        onPostSelected(post)
+                    })
+                }
             }
         } else {
-            if (state.posts.isNotEmpty()) {
-                LazyColumn(
-                    modifier = modifier
-                        .fillMaxSize()
-                        .background(MaterialTheme.colorScheme.tertiary)
-                        .padding(horizontal = 16.dp)
-                ) {
-                    itemsIndexed(state.posts) { index, post ->
-                        PostItem(
-                            position = index + 1,
-                            post = post,
-                            onClick = {
-                                onPostSelected(post)
-                            }
-                        )
-                    }
-                }
-            } else {
-                MessageScreen(
-                    icon = R.drawable.forest,
-                    title = R.string.no_content_found,
-                    message = R.string.when_i_arrived
-                )
-            }
+            MessageScreen(
+                icon = R.drawable.forest,
+                title = R.string.no_content_found,
+                message = R.string.when_i_arrived
+            )
         }
     }
 }
+
 
 @Preview
 @Composable
