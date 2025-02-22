@@ -18,9 +18,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.harukadev.tabnews.R
 import com.harukadev.tabnews.core.presentation.ObserverAsEvents
 import com.harukadev.tabnews.core.presentation.toString
-import com.harukadev.tabnews.posts.presentation.components.NoPostsScreen
+import com.harukadev.tabnews.posts.presentation.components.MessageScreen
 import com.harukadev.tabnews.posts.presentation.components.PostItem
 import com.harukadev.tabnews.posts.presentation.models.CardPostUi
 import com.harukadev.tabnews.ui.theme.AppTheme
@@ -80,7 +81,11 @@ fun RelevantPostsScreen(
                     }
                 }
             } else {
-                NoPostsScreen()
+                MessageScreen(
+                    icon = R.drawable.forest,
+                    title = R.string.no_content_found,
+                    message = R.string.when_i_arrived
+                )
             }
         }
     }

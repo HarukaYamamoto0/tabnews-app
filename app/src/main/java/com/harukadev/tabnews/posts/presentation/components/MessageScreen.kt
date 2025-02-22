@@ -1,5 +1,6 @@
 package com.harukadev.tabnews.posts.presentation.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -27,46 +29,49 @@ import com.harukadev.tabnews.ui.theme.AppTheme
 import com.harukadev.tabnews.ui.theme.darkGreen
 
 @Composable
-fun NoPostsScreen(
-    modifier: Modifier = Modifier
+fun MessageScreen(
+    modifier: Modifier = Modifier,
+    icon: Int,
+    title: Int,
+    message: Int,
+    iconModifier: Modifier = Modifier,
+    titleModifier: Modifier = Modifier,
+    messageModifier: Modifier = Modifier
 ) {
-    val contentColor = if (isSystemInDarkTheme())
-        Color.White
+    val contentColor = if (isSystemInDarkTheme()) Color.White
     else Color.Black
 
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(16.dp)
+            .background(MaterialTheme.colorScheme.background),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Icon(
-            imageVector = ImageVector.vectorResource(R.drawable.forest),
-            contentDescription = "forest",
-            modifier = Modifier
+            imageVector = ImageVector.vectorResource(icon),
+            contentDescription = stringResource(title),
+            modifier = iconModifier
                 .padding(bottom = 15.dp)
                 .size(75.dp),
             tint = darkGreen
         )
         Text(
-            text = stringResource(R.string.no_content_found),
-            style = TextStyle(
+            text = stringResource(title), style = TextStyle(
                 fontSize = 32.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = contentColor,
                 textAlign = TextAlign.Center
-            ),
-            modifier = Modifier.padding(bottom = 5.dp)
+            ), modifier = titleModifier.padding(bottom = 5.dp)
         )
         Text(
-            text = stringResource(R.string.when_i_arrived),
-            style = TextStyle(
+            text = stringResource(message), style = TextStyle(
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Normal,
                 color = contentColor.copy(alpha = .5f),
                 textAlign = TextAlign.Center
-            )
+            ), modifier = messageModifier
         )
     }
 }
@@ -74,8 +79,12 @@ fun NoPostsScreen(
 @Preview(showBackground = true)
 @PreviewLightDark
 @Composable
-private fun NoPostsPreview() {
+private fun MessageScreenPreview() {
     AppTheme {
-        NoPostsScreen()
+        MessageScreen(
+            title = R.string.no_content_found,
+            icon = R.drawable.forest,
+            message = R.string.post_not_found
+        )
     }
 }

@@ -30,14 +30,18 @@ class MainActivity : ComponentActivity() {
                     Scaffold(
                         topBar = { CustomTopAppBar() },
                         bottomBar = {
-                            CustomBottomAppBar(navController = navController, items = bottomNavigationItems)
+                            CustomBottomAppBar(
+                                navController = navController,
+                                items = bottomNavigationItems
+                            )
                         },
                         modifier = Modifier
                             .fillMaxSize()
-                            .background(MaterialTheme.colorScheme.tertiary),
+                            .background(MaterialTheme.colorScheme.background),
                     ) { innerPadding ->
                         AppNavHost(
-                            navController = navController, modifier = Modifier.padding(innerPadding)
+                            navController = navController,
+                            modifier = Modifier.padding(innerPadding)
                         )
                     }
                 }
