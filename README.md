@@ -68,7 +68,7 @@ Contribuições são sempre bem-vindas! Sinta-se à vontade para submeter issues
 4. Faça o **push** para a branch (`git push origin feature/nome-da-feature`).
 5. Abra um **Pull Request**.
 
-## 📬 Contato
+## 📬 Contatot
 
 Para qualquer dúvida, sugestão ou feedback, sinta-se à vontade para entrar em contato:
 - **Discord Username**: [albertthefluent](https://discord.com/users/822819247146663936)

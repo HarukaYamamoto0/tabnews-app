@@ -8,7 +8,10 @@ sealed interface Router
 
 @Immutable
 @Serializable
-data object RelevantPostsRouter : Router
+data class PostContentRouter(
+    val ownerUsername: String,
+    val slug: String
+) : Router
 
 @Immutable
 @Serializable
@@ -16,10 +19,15 @@ data object RecentPostsRouter : Router
 
 @Immutable
 @Serializable
-data class PostContentRouter(
-    val ownerUsername: String,
-    val slug: String
-) : Router
+data object RelevantPostsRouter : Router
+
+@Immutable
+@Serializable
+data object NotificationRouter : Router
+
+@Immutable
+@Serializable
+data object SettingsRouter : Router
 
 data class BottomNavigationItem(
     val title: Int,
@@ -53,7 +61,7 @@ val bottomNavigationItems = listOf(
         unselectedIcon = R.drawable.bell,
         hasNews = false,
         badgeCount = null,
-        router = RelevantPostsRouter
+        router = NotificationRouter
     ),
     BottomNavigationItem(
         title = R.string.settings,
@@ -61,6 +69,6 @@ val bottomNavigationItems = listOf(
         unselectedIcon = R.drawable.user_circle_gear,
         hasNews = false,
         badgeCount = null,
-        router = RelevantPostsRouter
+        router = SettingsRouter
     )
 )

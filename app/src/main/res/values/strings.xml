@@ -20,4 +20,6 @@
     <string name="notifications">Notifications</string>
     <string name="settings">Settings</string>
     <string name="content_not_found">Content not found</string>
+    <string name="sorry">Sorry</string>
+    <string name="this_part_of_the_app_is_still_under_construction">This part of the app is still under construction.</string>
 </resources>

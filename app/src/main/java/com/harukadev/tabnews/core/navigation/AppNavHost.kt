@@ -9,46 +9,23 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
+import com.harukadev.tabnews.notifications.presentation.NotificationScreen
 import com.harukadev.tabnews.posts.presentation.content_post.PostContentScreen
 import com.harukadev.tabnews.posts.presentation.content_post.PostContentViewModel
 import com.harukadev.tabnews.posts.presentation.recent_posts.RecentPostsScreen
 import com.harukadev.tabnews.posts.presentation.relevant_posts.RelevantPostsScreen
+import com.harukadev.tabnews.settings.presentation.SettingsScreen
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun AppNavHost(
-    modifier: Modifier = Modifier,
-    navController: NavHostController
+    modifier: Modifier = Modifier, navController: NavHostController
 ) {
     NavHost(
         modifier = modifier,
         navController = navController,
         startDestination = RelevantPostsRouter
     ) {
-        composable<RelevantPostsRouter> {
-            RelevantPostsScreen(
-                onPostSelected = { post ->
-                    navController.navigate(
-                        PostContentRouter(
-                            ownerUsername = post.ownerUsername,
-                            slug = post.slug
-                        )
-                    )
-                }
-            )
-        }
-        composable<RecentPostsRouter> {
-            RecentPostsScreen(
-                onPostSelected = { post ->
-                    navController.navigate(
-                        PostContentRouter(
-                            ownerUsername = post.ownerUsername,
-                            slug = post.slug
-                        )
-                    )
-                }
-            )
-        }
         composable<PostContentRouter> {
             val args = it.toRoute<PostContentRouter>()
 
@@ -60,6 +37,30 @@ fun AppNavHost(
             }
 
             PostContentScreen(state = state)
+        }
+        composable<RelevantPostsRouter> {
+            RelevantPostsScreen(onPostSelected = { post ->
+                navController.navigate(
+                    PostContentRouter(
+                        ownerUsername = post.ownerUsername, slug = post.slug
+                    )
+                )
+            })
+        }
+        composable<RecentPostsRouter> {
+            RecentPostsScreen(onPostSelected = { post ->
+                navController.navigate(
+                    PostContentRouter(
+                        ownerUsername = post.ownerUsername, slug = post.slug
+                    )
+                )
+            })
+        }
+        composable<NotificationRouter> {
+            NotificationScreen()
+        }
+        composable<SettingsRouter> {
+            SettingsScreen()
         }
     }
 }
