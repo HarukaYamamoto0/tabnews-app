@@ -22,4 +22,21 @@
     <string name="content_not_found">Content not found</string>
     <string name="sorry">Sorry</string>
     <string name="this_part_of_the_app_is_still_under_construction">This part of the app is still under construction.</string>
+    <string name="test_title">Your Profile</string>
+    <string name="test_title_categoty">Profile</string>
+    <string name="settings_category_profile">Profile</string>
+    <string name="settings_option_your_profile">Your Profile</string>
+    <string name="settings_category_appearance">Appearance</string>
+    <string name="settings_option_appearance_theme">Theme</string>
+    <string name="settings_option_appearance_font">Font</string>
+    <string name="settings_option_appearance_reading">Reading</string>
+    <string name="settings_option_profile_profile_management">Profile Management</string>
+    <string name="settings_option_profile_security">Security</string>
+    <string name="settings_option_profile_management">Profile Management</string>
+    <string name="settings_category_notifications">Notifications</string>
+    <string name="settings_option_notifications_new_posts">New Posts</string>
+    <string name="settings_option_notifications_comments">Comments</string>
+    <string name="settings_category_data_sync">Data Sync</string>
+    <string name="settings_option_data_sync_manual">Sync Manual</string>
+    <string name="settings_option_data_sync_auto">Sync Auto</string>
 </resources>

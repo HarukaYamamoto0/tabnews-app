@@ -33,8 +33,53 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.harukadev.tabnews.R
 import com.harukadev.tabnews.ui.theme.AppTheme
 import com.harukadev.tabnews.ui.theme.snow
+
+data class BottomNavigationItem(
+    val title: Int,
+    val selectedIcon: Int,
+    val unselectedIcon: Int,
+    val hasNews: Boolean,
+    val badgeCount: Int? = null,
+    val router: Router
+)
+
+val bottomNavigationItems = listOf(
+    BottomNavigationItem(
+        title = R.string.recents,
+        selectedIcon = R.drawable.house_fill,
+        unselectedIcon = R.drawable.house,
+        hasNews = false,
+        badgeCount = null,
+        RecentPostsRouter
+    ),
+    BottomNavigationItem(
+        title = R.string.relevant,
+        selectedIcon = R.drawable.ranking_fill,
+        unselectedIcon = R.drawable.ranking,
+        hasNews = false,
+        badgeCount = null,
+        router = RelevantPostsRouter
+    ),
+    BottomNavigationItem(
+        title = R.string.notifications,
+        selectedIcon = R.drawable.bell_fill,
+        unselectedIcon = R.drawable.bell,
+        hasNews = false,
+        badgeCount = null,
+        router = NotificationRouter
+    ),
+    BottomNavigationItem(
+        title = R.string.settings,
+        selectedIcon = R.drawable.user_circle_gear_fill,
+        unselectedIcon = R.drawable.user_circle_gear,
+        hasNews = false,
+        badgeCount = null,
+        router = SettingsRouter
+    )
+)
 
 @Composable
 fun CustomBottomAppBar(
@@ -45,7 +90,7 @@ fun CustomBottomAppBar(
     var selectedItemIndex by rememberSaveable { mutableIntStateOf(0) }
 
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .drawBehind {
                 drawLine(
