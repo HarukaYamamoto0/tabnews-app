@@ -6,21 +6,23 @@ junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.8.7"
-activityCompose = "1.9.3"
-composeBom = "2024.12.01"
-uiTextGoogleFonts = "1.7.6"
+activityCompose = "1.10.1"
+composeBom = "2025.02.00"
+uiTextGoogleFonts = "1.7.8"
 kotlinxSerializationJson = "1.8.0-RC"
 ktorClientCore = "3.0.3"
 ktorClientCio = "3.0.3"
 ktorClientContentNegotiation = "3.0.3"
-ktorSerializationKotlinxJson = "3.0.3"
+ktorSerializationKotlinxJson = "3.1.1"
 koinCompose = "4.1.0-Beta1"
 koinComposeViewmodel = "4.1.0-Beta1"
 koinComposeViewmodelNavigation = "4.1.0-Beta1"
 koinAndroidxCompose = "4.1.0-Beta1"
-ktorClientLogging = "3.0.3"
-constraintlayoutCompose = "1.1.0"
-navigationCompose = "2.9.0-alpha04"
+ktorClientLogging = "3.1.1"
+constraintlayoutCompose = "1.1.1"
+navigationCompose = "2.9.0-alpha07"
+navigationComposeVersion = "2.9.0-alpha07"
+material = "1.13.0-alpha11"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -50,6 +52,8 @@ koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compos
 ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktorClientLogging" }
 androidx-constraintlayout-compose = { group = "androidx.constraintlayout", name = "constraintlayout-compose", version.ref = "constraintlayoutCompose" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
+navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationComposeVersion" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

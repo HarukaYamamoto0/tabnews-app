@@ -34,6 +34,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.harukadev.tabnews.R
+import com.harukadev.tabnews.core.navigation.graphs.NotificationRouter
+import com.harukadev.tabnews.core.navigation.graphs.RecentPostsRouter
+import com.harukadev.tabnews.core.navigation.graphs.RelevantPostsRouter
+import com.harukadev.tabnews.core.navigation.graphs.SettingsRouter
 import com.harukadev.tabnews.ui.theme.AppTheme
 import com.harukadev.tabnews.ui.theme.snow
 
@@ -43,7 +47,7 @@ data class BottomNavigationItem(
     val unselectedIcon: Int,
     val hasNews: Boolean,
     val badgeCount: Int? = null,
-    val router: Router
+    val router: Any
 )
 
 val bottomNavigationItems = listOf(
