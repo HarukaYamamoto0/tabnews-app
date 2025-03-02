@@ -1,4 +1,4 @@
-package com.harukadev.tabnews.settings.presentation.components
+package com.harukadev.tabnews.settings.presentation.settings_screen.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme

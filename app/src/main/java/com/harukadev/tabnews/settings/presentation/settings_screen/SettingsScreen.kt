@@ -11,14 +11,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.harukadev.tabnews.R
-import com.harukadev.tabnews.settings.presentation.components.SettingsCategory
-import com.harukadev.tabnews.settings.presentation.components.SettingsSwitch
-import com.harukadev.tabnews.settings.presentation.components.SettingsTextOpen
+import com.harukadev.tabnews.core.navigation.graphs.ThemeRouter
+import com.harukadev.tabnews.settings.presentation.settings_screen.components.SettingsCategory
+import com.harukadev.tabnews.settings.presentation.settings_screen.components.SettingsSwitch
+import com.harukadev.tabnews.settings.presentation.settings_screen.components.SettingsTextOpen
 import com.harukadev.tabnews.ui.theme.AppTheme
 
 @Composable
 fun SettingsScreen(
+    navController: NavController,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -44,7 +48,10 @@ fun SettingsScreen(
             title = R.string.settings_category_appearance
         ) {
             SettingsTextOpen(
-                title = R.string.settings_option_appearance_theme
+                title = R.string.settings_option_appearance_theme,
+                onClick = {
+                    navController.navigate(ThemeRouter)
+                }
             )
             SettingsTextOpen(
                 title = R.string.settings_option_appearance_reading,
@@ -84,6 +91,6 @@ fun SettingsScreen(
 @Composable
 private fun SettingsScreenPreview() {
     AppTheme {
-        SettingsScreen()
+        SettingsScreen(navController = rememberNavController())
     }
 }
