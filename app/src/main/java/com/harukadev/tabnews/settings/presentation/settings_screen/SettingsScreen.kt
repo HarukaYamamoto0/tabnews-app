@@ -40,7 +40,7 @@ fun SettingsScreen(
             )
             SettingsTextOpen(
                 title = R.string.settings_option_profile_security,
-                enabled = false
+                enabled = true
             )
         }
 
@@ -55,7 +55,7 @@ fun SettingsScreen(
             )
             SettingsTextOpen(
                 title = R.string.settings_option_appearance_reading,
-                enabled = false
+                enabled = true
             )
         }
 
@@ -64,11 +64,11 @@ fun SettingsScreen(
         ) {
             SettingsSwitch(
                 title = R.string.settings_option_notifications_new_posts,
-                enabled = false
+                enabled = true
             )
             SettingsSwitch(
                 title = R.string.settings_option_notifications_comments,
-                enabled = false
+                enabled = true
             )
         }
 
@@ -77,11 +77,11 @@ fun SettingsScreen(
         ) {
             SettingsTextOpen(
                 title = R.string.settings_option_data_sync_manual,
-                enabled = false
+                enabled = true
             )
             SettingsSwitch(
                 title = R.string.settings_option_data_sync_auto,
-                enabled = false
+                enabled = true
             )
         }
     }
