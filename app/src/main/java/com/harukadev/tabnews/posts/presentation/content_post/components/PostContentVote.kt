@@ -30,10 +30,10 @@ import com.harukadev.tabnews.ui.theme.AppTheme
 
 @Composable
 fun PostContentVote(
+    modifier: Modifier = Modifier,
     tabcoins: Int,
     onUpVote: () -> Unit = {},
     onDownVote: () -> Unit = {},
-    modifier: Modifier = Modifier
 ) {
     val contentColor = MaterialTheme.colorScheme.onTertiary
 

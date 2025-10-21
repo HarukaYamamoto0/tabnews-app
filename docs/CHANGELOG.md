@@ -1,48 +1,48 @@
-# 🧾 Changelog
+## 🧾 **Changelog**
 
-## [Unreleased]
+### 🧹 Project Structure & Housekeeping
 
-### ✨ Added
+* **Refactored `.gitignore`** with a full, structured layout:
 
-* Introduced **custom vector icons** for post voting:
+	* Organized into clear sections (`Gradle`, `Android Studio`, `OS`, `Logs`, etc.).
+	* Added proper exceptions for Gradle wrapper files.
+	* Ignored sensitive files (keystores, temporary files, caches).
+	* Removed redundant `.idea/.gitignore` and IDE metadata files.
 
-	* `caret_up.xml`
-	* `caret_down.xml`
-* Added `docs/CHANGELOG.md` to track future updates.
+* **Cleaned project metadata**:
 
-### 🛠️ Changed
+	* Removed outdated `.idea` configuration files (compiler, misc, vcs, etc.).
+	* Updated `.idea/gradle.xml` to use `jbr-21` as the Gradle JVM.
+	* Added new code style import layout to `Project.xml` for consistent Kotlin/Java imports.
+	* Added Android Vitals settings in `appInsightsSettings.xml`.
+	* Removed generated `app/release` artifacts and baseline profiles from version control.
 
-* **SDK and Build Configuration**
+### ⚙️ **Build Configuration**
 
-	* Upgraded `compileSdk` and `targetSdk` from **35 → 36**.
-	* Updated **Gradle Wrapper** from **8.11.1 → 8.13**.
-	* Updated **Android Gradle Plugin (AGP)** to **8.13.0**.
-	* Bumped Java and Kotlin compatibility to **version 17**.
-	* Added `ndkVersion = "27.0.12077973"`.
-	* Updated debug `BASE_URL` to `http://10.0.2.2:8080/api/v1`.
-	* Enabled `isMinifyEnabled = true` for release builds.
-	* Added `applicationIdSuffix = ".debug"` for debug builds.
+* **Enhanced `gradle.properties`** for performance and modern build practices:
 
-* **Dependencies**
+	* Increased Gradle JVM heap size to **8 GB**.
+	* Enabled:
 
-	* Updated major libraries to the latest stable versions:
+		* **Parallel builds**
+		* **Configuration cache**
+		* **Gradle build cache**
+	* Set `android.enableJetifier=false` (for modern AndroidX-only dependencies).
+	* Tuned Kotlin daemon to **4 GB heap**, enabled incremental compilation, IR backend, and caching.
+	* Improved output determinism and enabled detailed logging.
+	* Switched to rich console output and warning mode `all`.
 
-		* **Koin** → 4.1.1
-		* **Ktor** → 3.3.1
-		* **Compose BOM** → 2025.10.00
-		* **Lifecycle Runtime KTX** → 2.9.4
-		* **Core KTX** → 1.17.0
-		* **Activity Compose** → 1.11.0
-		* **Navigation Compose** → 2.9.5
-		* **Material Components** → 1.13.0
-	* Replaced redundant `androidx.navigation.compose` dependency with unified `libs.navigation.compose`.
+### 🧩 **Gradle Setup**
 
-* **UI Improvements**
+* Updated `settings.gradle.kts`:
 
-	* Replaced default `Icons.Default.KeyboardArrowUp/Down` with new **custom caret vector icons** in `PostContentVote.kt`.
-	* Simplified icon rendering by using `ImageVector.vectorResource()`.
+	* Added `@Suppress("UnstableApiUsage")` annotations for `repositoriesMode`.
+	* Included `gradlePluginPortal()` inside `dependencyResolutionManagement`.
+	* Enabled `TYPESAFE_PROJECT_ACCESSORS` feature preview for cleaner Gradle accessors.
+	* Improved repository configuration structure and readability.
 
-### 🧹 Removed
+### 🎨 **Code Improvements**
 
-* Removed deprecated `androidx.navigation.compose` dependency.
-* Removed unused resource exclusions from the Gradle packaging configuration.
+* Minor cleanup in `PostContentVote.kt`:
+
+	* Reordered parameters for better Kotlin style consistency (`modifier` now comes first).

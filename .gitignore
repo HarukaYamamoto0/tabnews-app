@@ -1,15 +1,77 @@
-*.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+# ==========================================
+# Android & Gradle Project Ignore Rules
+# ==========================================
+
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
+
+# Local configuration (machine-specific)
 local.properties
+.cxx/
+.externalNativeBuild/
+
+# ==========================================
+# Android Studio / IntelliJ
+# ==========================================
+
+# Project files
+*.iml
+.idea/
+.idea/dictionaries/*
+!.idea/dictionaries/project.xml
+
+# Android Studio captures & caches
+captures/
+.navigation/
+.cache/
+buildSrc/build/
+
+# ==========================================
+# OS / Misc
+# ==========================================
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# ==========================================
+# Logs / Misc Files
+# ==========================================
+
+*.log
+*.lock
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# ==========================================
+# Keystores / Credentials (never commit these)
+# ==========================================
+
+*.jks
+*.keystore
+*.pem
+*.p12
+*.key
+
+# ==========================================
+# Gradle Daemon & Build Output
+# ==========================================
+
+# Local build cache
+out/
+intermediates/
+generated/
+tmp/
+obj/
