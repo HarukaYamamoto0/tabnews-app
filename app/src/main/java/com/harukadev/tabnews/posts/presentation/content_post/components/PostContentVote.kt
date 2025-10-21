@@ -9,9 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -19,7 +16,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -41,7 +40,8 @@ fun PostContentVote(
     Column(
         modifier = modifier.fillMaxHeight(), horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Icon(imageVector = Icons.Default.KeyboardArrowUp,
+        Icon(
+            imageVector = ImageVector.vectorResource(R.drawable.caret_up),
             contentDescription = stringResource(R.string.hint_upvote_this_post),
             tint = contentColor,
             modifier = Modifier
@@ -58,7 +58,8 @@ fun PostContentVote(
             modifier = Modifier.padding(vertical = 8.dp)
         )
 
-        Icon(imageVector = Icons.Default.KeyboardArrowDown,
+        Icon(
+            imageVector = ImageVector.vectorResource(R.drawable.caret_down),
             contentDescription = stringResource(R.string.hint_downvote_this_post),
             tint = contentColor,
             modifier = Modifier

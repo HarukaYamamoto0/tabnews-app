@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace = "com.harukadev.tabnews"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.harukadev.tabnews"
         minSdk = 30
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
@@ -21,34 +21,34 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField("String", "BASE_URL", "\"http://10.0.2.2:3000/api/v1\"")
+            buildConfigField("String", "BASE_URL", "\"http://10.0.2.2:8080/api/v1\"")
             buildConfigField("String", "TABNEWS_URL", "\"https://www.tabnews.com.br\"")
+
+            applicationIdSuffix = ".debug"
+            isMinifyEnabled = false
         }
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
             )
             buildConfigField("String", "BASE_URL", "\"https://www.tabnews.com.br/api/v1\"")
             buildConfigField("String", "TABNEWS_URL", "\"https://www.tabnews.com.br\"")
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
     buildFeatures {
         buildConfig = true
         compose = true
     }
-    packaging {
-        resources {
-            excludes += "META-INF/INDEX.LIST"
-        }
-    }
+    ndkVersion = "27.0.12077973"
 }
 
 dependencies {
@@ -73,7 +73,6 @@ dependencies {
     implementation(libs.koin.androidx.compose)
     implementation(libs.ktor.client.logging)
     implementation(libs.androidx.constraintlayout.compose)
-    implementation(libs.androidx.navigation.compose)
     implementation(libs.navigation.compose)
     implementation(libs.material)
     testImplementation(libs.junit)
