@@ -75,3 +75,6 @@ intermediates/
 generated/
 tmp/
 obj/
+
+app/build
+app/release

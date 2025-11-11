@@ -16,34 +16,31 @@ import com.harukadev.tabnews.core.navigation.CustomBottomAppBar
 import com.harukadev.tabnews.core.navigation.CustomTopAppBar
 import com.harukadev.tabnews.core.navigation.bottomNavigationItems
 import com.harukadev.tabnews.ui.theme.AppTheme
-import org.koin.compose.KoinContext
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            KoinContext {
-                AppTheme {
-                    val navController = rememberNavController()
+            AppTheme {
+                val navController = rememberNavController()
 
-                    Scaffold(
-                        topBar = { CustomTopAppBar() },
-                        bottomBar = {
-                            CustomBottomAppBar(
-                                navController = navController,
-                                items = bottomNavigationItems
-                            )
-                        },
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .background(MaterialTheme.colorScheme.background),
-                    ) { innerPadding ->
-                        AppNavHost(
+                Scaffold(
+                    topBar = { CustomTopAppBar() },
+                    bottomBar = {
+                        CustomBottomAppBar(
                             navController = navController,
-                            modifier = Modifier.padding(innerPadding)
+                            items = bottomNavigationItems
                         )
-                    }
+                    },
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(MaterialTheme.colorScheme.background),
+                ) { innerPadding ->
+                    AppNavHost(
+                        navController = navController,
+                        modifier = Modifier.padding(innerPadding)
+                    )
                 }
             }
         }
